@@ -1,4 +1,22 @@
 @import "tailwindcss";
+@import "tailwindcss/preflight";
+@import "tailwindcss/utilities";
+
+@layer utilities {
+  .font-shrikhand {
+    font-family: var(--font-shrikhand), cursive;
+    font-style: italic;
+  }
+
+  .font-roboto-black {
+    font-family: var(--font-roboto-black), sans-serif;
+  }
+
+  /* Correção para o letter-spacing */
+  .tracking-custom {
+    letter-spacing: -0.04em;
+  }
+}
 
 :root {
   --background: #ffffff;
