@@ -2,6 +2,7 @@ import { Inter, Roboto, Shrikhand } from "next/font/google";
 import "./globals.css";
 import Image from "next/image";
 import layout from "../../public/layout.png";
+import { Metadata } from "next";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -16,6 +17,14 @@ const robotoBlack = Roboto({
   subsets: ["latin"],
   variable: "--font-roboto-black",
 });
+
+export const metadata: Metadata = {
+  title: "ECO ARAPIRACA",
+  description: "Sistema de administração ECO ARAPIRACA",
+  icons: {
+    icon: "/favicon.ico",
+  },
+};
 
 export default function RootLayout({
   children,
