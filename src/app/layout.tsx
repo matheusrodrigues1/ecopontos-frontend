@@ -33,8 +33,12 @@ export default function RootLayout({
 }) {
   return (
     <html lang="pt-BR">
-      <div className="">
-        <Image alt="layout" src={layout} className="w-[47px] h-[47px]" />
+      <div className="w-full !bg-white">
+        <Image
+          alt="layout"
+          src={layout}
+          className="w-[47px] h-[47px] !bg-white"
+        />
       </div>
       <body
         className={`${shrikhand.variable} ${robotoBlack.variable} ${inter.className}`}
