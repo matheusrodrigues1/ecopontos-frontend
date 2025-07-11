@@ -53,8 +53,8 @@ const Login = () => {
             <Image
               src={buttonImage}
               alt="Acessar"
-              width={159} // Largura da sua imagem
-              height={37} // Altura da sua imagem
+              width={159}
+              height={37}
               className="hover:opacity-90 transition-opacity"
             />
           </button>

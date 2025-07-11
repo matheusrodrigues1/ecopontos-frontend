@@ -33,7 +33,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="pt-BR">
-      <div className="w-full !bg-white !absolute">
+      <div className="w-full !bg-white">
         <Image
           alt="layout"
           src={layout}
