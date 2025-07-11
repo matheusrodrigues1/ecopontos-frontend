@@ -1,11 +1,9 @@
 import React from "react";
 
-const Cadastrar = () => {
+const Salvar = () => {
   return (
     <div className="flex flex-col items-center w-screen h-screen gap-10 bg-white">
-      <span className="font-bold text-2xl text-black">
-        Cadastrar informações
-      </span>
+      <span className="font-bold text-2xl text-black">Editar</span>
       <div className="flex flex-col items-center justify-center mb-10">
         <form className="flex flex-col gap-2 w-[340px]">
           <div>
@@ -92,7 +90,7 @@ const Cadastrar = () => {
             type="submit"
             className="mt-9 self-center h-[40px] w-[200px] !bg-[#093A3E] !text-white !rounded-lg"
           >
-            Cadastrar
+            Salvar
           </button>
         </form>
       </div>
@@ -100,4 +98,4 @@ const Cadastrar = () => {
   );
 };
 
-export default Cadastrar;
+export default Salvar;
