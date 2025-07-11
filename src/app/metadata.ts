@@ -1,4 +1,3 @@
-// src/app/metadata.ts (novo arquivo)
 import { Metadata } from "next";
 
 export const metadata: Metadata = {

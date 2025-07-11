@@ -1,4 +1,3 @@
-// src/app/layout.tsx (arquivo modificado)
 "use client";
 
 import { Inter, Roboto, Shrikhand } from "next/font/google";
