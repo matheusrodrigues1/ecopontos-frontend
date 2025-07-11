@@ -1,8 +1,11 @@
+// src/app/layout.tsx (arquivo modificado)
+"use client";
+
 import { Inter, Roboto, Shrikhand } from "next/font/google";
 import "./globals.css";
 import Image from "next/image";
 import layout from "../../public/layout.png";
-import { Metadata } from "next";
+import { useRouter } from "next/navigation";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -18,26 +21,28 @@ const robotoBlack = Roboto({
   variable: "--font-roboto-black",
 });
 
-export const metadata: Metadata = {
-  title: "ECO ARAPIRACA",
-  description: "Sistema de administração ECO ARAPIRACA",
-  icons: {
-    icon: "/favicon.ico",
-  },
-};
-
 export default function RootLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
+  const router = useRouter();
+
+  const handleGoBack = () => {
+    router.back();
+  };
+
   return (
     <html lang="pt-BR">
       <div className="w-full !bg-white">
         <Image
-          alt="layout"
+          alt="Seta para voltar"
           src={layout}
-          className="w-[47px] h-[47px] !bg-white"
+          className="w-[47px] h-[47px] !bg-white cursor-pointer"
+          onClick={handleGoBack}
+          role="button"
+          tabIndex={0}
+          onKeyDown={(e) => e.key === "Enter" && handleGoBack()}
         />
       </div>
       <body

@@ -1,9 +1,19 @@
+"use client";
 import Image from "next/image";
 import React from "react";
+import { useRouter } from "next/navigation";
 import logo from "../../../public/login.png";
 import buttonImage from "../../../public/Group 1.png";
+import { FormEvent } from "react";
 
 const Login = () => {
+  const router = useRouter();
+
+  const handleLogin = (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    router.push("/menu");
+  };
+
   return (
     <div className="flex flex-col justify-center items-center w-screen h-screen pb-20 bg-white gap-10">
       <div className="w-[59px] h-[57px] relative !mt-[-60px]">
@@ -28,7 +38,7 @@ const Login = () => {
         </span>
       </div>
       <div className="flex flex-col items-center justify-center">
-        <form className="flex flex-col gap-4 w-[340px]">
+        <form className="flex flex-col gap-4 w-[340px]" onSubmit={handleLogin}>
           <div>
             <label className="block text-[20px] text-[#093A3E] font-bold mb-1">
               Usuario
