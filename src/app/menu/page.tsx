@@ -4,7 +4,7 @@ import logo from "../../../public/login.png";
 
 const Menu = () => {
   return (
-    <div className="flex flex-col items-center !pt-10 w-screen h-screen">
+    <div className="flex flex-col items-center !pt-20 bg-white w-screen h-screen">
       <div className="w-[59px] h-[57px] relative">
         <Image
           src={logo}
