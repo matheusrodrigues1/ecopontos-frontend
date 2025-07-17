@@ -14,7 +14,9 @@ const Editar = () => {
           <Image
             src={trashIcon}
             alt="Lixeira"
-            className="h-5 w-5 cursor-pointer"
+            width={20}
+            height={20}
+            className="cursor-pointer"
           />
         </span>
         <span className="font-bold bg-[#093A3E] w-[381px] rounded-lg flex !pl-2 !pr-2 justify-between items-center h-[53px] text-xl text-white">
@@ -22,7 +24,9 @@ const Editar = () => {
           <Image
             src={trashIcon}
             alt="Lixeira"
-            className="h-5 w-5 cursor-pointer"
+            width={20}
+            height={20}
+            className="cursor-pointer"
           />
         </span>
         <span className="font-bold bg-[#093A3E] w-[381px] rounded-lg flex !pl-2 !pr-2 justify-between items-center h-[53px] text-xl text-white">
@@ -30,7 +34,9 @@ const Editar = () => {
           <Image
             src={trashIcon}
             alt="Lixeira"
-            className="h-5 w-5 cursor-pointer"
+            width={20}
+            height={20}
+            className="cursor-pointer"
           />
         </span>
       </div>

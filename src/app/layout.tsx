@@ -2,9 +2,8 @@
 
 import { Inter, Roboto, Shrikhand } from "next/font/google";
 import "./globals.css";
-import Image from "next/image";
-import layout from "../../public/layout.png";
-import { useRouter } from "next/navigation";
+import { ToastProvider } from "../contexts/ToastContext";
+import NoSSR from "../components/NoSSR";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -25,29 +24,17 @@ export default function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
-  const router = useRouter();
-
-  const handleGoBack = () => {
-    router.back();
-  };
-
   return (
-    <html lang="pt-BR">
-      <div className="w-full !bg-white">
-        <Image
-          alt="Seta para voltar"
-          src={layout}
-          className="w-[47px] h-[47px] !bg-white cursor-pointer"
-          onClick={handleGoBack}
-          role="button"
-          tabIndex={0}
-          onKeyDown={(e) => e.key === "Enter" && handleGoBack()}
-        />
-      </div>
+    <html lang="pt-BR" suppressHydrationWarning>
       <body
         className={`${shrikhand.variable} ${robotoBlack.variable} ${inter.className}`}
+        suppressHydrationWarning
       >
-        {children}
+        <ToastProvider>
+          <NoSSR>
+            {children}
+          </NoSSR>
+        </ToastProvider>
       </body>
     </html>
   );
