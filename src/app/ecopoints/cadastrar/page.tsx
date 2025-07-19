@@ -4,6 +4,8 @@ import React, { useState } from "react";
 import { useRouter } from "next/navigation";
 import { cadastrar } from "./cadastrar";
 
+import { EcoPoint } from "@/app/types/ecopoints/ecopoints";
+
 const Cadastrar = () => {
   const router = useRouter();
   const [formData, setFormData] = useState({
@@ -46,7 +48,7 @@ const Cadastrar = () => {
         coordinates: formData.coordinates
       };
 
-      const response = await cadastrar(payload);
+      const response = await cadastrar(payload as EcoPoint);
 
       console.log("Ecoponto cadastrado com sucesso:", response.data);
       alert("Ecoponto cadastrado com sucesso!");
@@ -61,11 +63,16 @@ const Cadastrar = () => {
         coordinates: ""
       });
 
-    } catch (error: any) {
+    } catch (error) {
       console.error("Erro ao cadastrar ecoponto:", error);
 
-      if (error.response?.status === 400) {
-        alert("Erro de validação: " + (error.response?.data?.message || "Verifique os dados e tente novamente."));
+      if (typeof error === "object" && error !== null && "response" in error) {
+        const err = error as { response?: { status?: number; data?: { message?: string } } };
+        if (err.response?.status === 400) {
+          alert("Erro de validação: " + (err.response?.data?.message || "Verifique os dados e tente novamente."));
+        } else {
+          alert("Erro ao cadastrar ecoponto. Verifique os dados e tente novamente.");
+        }
       } else {
         alert("Erro ao cadastrar ecoponto. Verifique os dados e tente novamente.");
       }

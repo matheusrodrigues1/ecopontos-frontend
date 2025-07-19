@@ -3,10 +3,10 @@
 import Image from "next/image";
 import React, { useState } from "react";
 import { useRouter } from "next/navigation";
-import axios from "axios";
 import logo from "../../../../public/login.png";
 import buttonImage from "../../../../public/Group 1.png";
 import { useToastContext } from "../../../contexts/ToastContext";
+import { loginUser } from "./login";
 
 const Login = () => {
   const [formData, setFormData] = useState({
@@ -29,21 +29,25 @@ const Login = () => {
     setIsLoading(true);
 
     try {
-      const response = await axios.post("http://localhost:3001/auth/login", formData);
-      
-      // Salvar token e dados do usuário
-      localStorage.setItem("token", response.data.access_token);
-      localStorage.setItem("user", JSON.stringify(response.data.user));
-      
-      showSuccess("Login realizado com sucesso!");
-      
-      // Pequeno delay para mostrar a mensagem antes de redirecionar
-      setTimeout(() => {
-        router.push("/menu");
-      }, 1000);
-    } catch (error: any) {
+      loginUser(formData)
+        .then((response) => {
+          if (response.access_token) {
+            localStorage.setItem("token", response.access_token);
+            localStorage.setItem("user", JSON.stringify(response.user));
+            showSuccess("Login realizado com sucesso!");
+            router.push("/menu");
+          } else {
+            showError("Erro no login");
+          }
+        });
+    } catch (error) {
       console.error("Erro no login:", error);
-      const errorMessage = error.response?.data?.message || "Credenciais inválidas";
+      let errorMessage = "Credenciais inválidas";
+      if (error && typeof error === "object" && "response" in error && error.response && typeof error.response === "object" && "data" in error.response && error.response.data && typeof error.response.data === "object" && "message" in error.response.data) {
+        errorMessage = (error.response as { data?: { message?: string } }).data?.message || errorMessage;
+      } else if (error instanceof Error) {
+        errorMessage = error.message;
+      }
       showError(errorMessage);
     } finally {
       setIsLoading(false);

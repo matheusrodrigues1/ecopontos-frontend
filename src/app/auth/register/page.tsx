@@ -23,19 +23,20 @@ const Register = () => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsLoading(true);
-
     try {
       const response = await axios.post("http://localhost:3001/auth/register", formData);
-      
-      // Salvar token e dados do usuário
       localStorage.setItem("token", response.data.access_token);
       localStorage.setItem("user", JSON.stringify(response.data.user));
-      
       alert("Cadastro realizado com sucesso!");
       router.push("/menu");
-    } catch (error: any) {
+    } catch (error) {
+      let errorMessage = "Erro ao fazer cadastro";
+      if (error && typeof error === "object" && "response" in error && error.response && typeof error.response === "object" && "data" in error.response && error.response.data && typeof error.response.data === "object" && "message" in error.response.data) {
+        errorMessage = (error.response as { data?: { message?: string } }).data?.message || errorMessage;
+      } else if (error instanceof Error) {
+        errorMessage = error.message;
+      }
       console.error("Erro no cadastro:", error);
-      const errorMessage = error.response?.data?.message || "Erro ao fazer cadastro";
       alert(errorMessage);
     } finally {
       setIsLoading(false);

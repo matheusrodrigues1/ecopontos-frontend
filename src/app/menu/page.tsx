@@ -9,7 +9,7 @@ import logo from "../../../public/login.png";
 
 const Menu = () => {
   const router = useRouter();
-  const { user, logout } = useAuth();
+  const { user } = useAuth();
 
   return (
     <ProtectedRoute>
@@ -67,7 +67,7 @@ const Menu = () => {
         </div>
         <div className="flex flex-col items-center justify-center gap-2 !mt-8">
           <button
-            onClick={() => router.push("/cadastrar")}
+            onClick={() => router.push("/ecopoints/cadastrar")}
             style={{
               display: 'flex',
               alignItems: 'center',
@@ -93,7 +93,7 @@ const Menu = () => {
             Cadastrar Ecoponto
           </button>
           <button
-            onClick={() => router.push("/listar")}
+            onClick={() => router.push("/ecopoints/listar")}
             style={{
               display: 'flex',
               alignItems: 'center',

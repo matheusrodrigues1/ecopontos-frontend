@@ -1,4 +1,4 @@
-import { deleteEco } from "../ecopoints/deleteEcoponto";
+import { deleteEco } from "../deleteEcoponto";
 
 export const handleDeleteEcoponto = async (id: string, title: string) => {
     if (!confirm(`Tem certeza que deseja excluir o ecoponto "${title}"?`)) {

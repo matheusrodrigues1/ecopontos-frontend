@@ -3,7 +3,7 @@
 import { Inter, Roboto, Shrikhand } from "next/font/google";
 import "./globals.css";
 import { ToastProvider } from "../contexts/ToastContext";
-import NoSSR from "../components/NoSSR";
+import NoSSR from "./components/NoSSR";
 
 const inter = Inter({ subsets: ["latin"] });
 

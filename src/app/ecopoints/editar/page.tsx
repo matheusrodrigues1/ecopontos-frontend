@@ -1,10 +1,8 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
-import axios from "axios";
+import axios, { AxiosError } from "axios";
 import { useRouter } from "next/navigation";
-
-import "../styles/global.css";
 
 interface EcoPoint {
   id: string;
@@ -46,7 +44,7 @@ const Editar = () => {
         coordinates: ecopointData.coordinates
       });
     } else {
-      router.push('/listar');
+      router.push('/ecopoints/listar');
     }
   }, [router]);
 
@@ -92,10 +90,10 @@ const Editar = () => {
       localStorage.removeItem('editingEcopoint');
       router.push('/listar');
 
-    } catch (error: any) {
+    } catch (error) {
       console.error("Erro ao atualizar ecoponto:", error);
 
-      if (error.response?.status === 400) {
+      if (error instanceof AxiosError && error.response?.status === 400) {
         alert("Erro de validação: " + (error.response?.data?.message || "Verifique os dados e tente novamente."));
       } else {
         alert("Erro ao atualizar ecoponto. Verifique os dados e tente novamente.");
@@ -107,7 +105,7 @@ const Editar = () => {
 
   const handleCancel = () => {
     localStorage.removeItem('editingEcopoint');
-    router.push('/listar');
+    router.push('/ecopoints/listar');
   };
 
   if (!ecopoint) {
@@ -121,9 +119,9 @@ const Editar = () => {
   return (
     <div className="flex flex-col items-center w-screen h-screen gap-10 bg-white">
       <div className="flex items-center gap-4 mt-8">
-        <div style={{paddingTop: '8px'}}>
+        <div style={{ paddingTop: '8px' }}>
           <button
-            onClick={() => router.push("/listar")}
+            onClick={() => router.push("/ecopoints/listar")}
             className="transition-colors"
             style={{
               backgroundColor: '#093A3E',

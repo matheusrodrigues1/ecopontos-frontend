@@ -1,5 +1,5 @@
 import React from "react";
-import trashIcon from "../../../public/lixeira.png";
+import trashIcon from "@/../public/lixeira.png";
 import Image from "next/image";
 
 const Editar = () => {

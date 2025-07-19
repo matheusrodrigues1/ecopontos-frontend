@@ -6,21 +6,22 @@ import { useRouter } from 'next/navigation';
 import prefeituraLogo from "../../../public/prefeitura_arapiraca_logo.png"
 import { getEcopontos } from '../ecopoints/getEcopoints';
 import { LoadGoogleMapsScript } from './loadMaps';
+import { EcoPoint } from '@/app/types/ecopoints/ecopoints';
 
 const MapPage = () => {
     const mapRef = useRef<HTMLDivElement>(null);
-    const [map, setMap] = useState<any>(null);
+    const [map, setMap] = useState<google.maps.Map | null>(null);
     const [ecoPoints, setEcoPoints] = useState<EcoPoint[]>([]);
     const [isLoading, setIsLoading] = useState(true);
     const [error, setError] = useState<string | null>(null);
-    const [user, setUser] = useState<any>(null);
-    const [infoWindow, setInfoWindow] = useState<any>(null);
+    const [user, setUser] = useState<{ name: string; role: string } | null>(null);
+    const [infoWindow, setInfoWindow] = useState<google.maps.InfoWindow | null>(null);
     const [isMounted, setIsMounted] = useState(false);
     const router = useRouter();
 
     useEffect(() => {
         setIsMounted(true);
-    }, []);
+    }, [map, infoWindow]);
 
     useEffect(() => {
         if (!isMounted) return;
@@ -173,7 +174,7 @@ const MapPage = () => {
     useEffect(() => {
         if (!isMounted) return;
         initializeAll();
-    }, [isMounted]);
+    }, [isMounted, initializeAll]);
 
     if (!isMounted) {
         return (

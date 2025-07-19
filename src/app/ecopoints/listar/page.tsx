@@ -2,9 +2,10 @@
 
 import React, { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
-import ProtectedRoute from "../components/ProtectedRoute";
-import { getEcopontos } from "../ecopoints/getEcopoints";
+import ProtectedRoute from "../../components/ProtectedRoute";
+import { getEcopontos } from "../getEcopoints";
 import { handleDeleteEcoponto } from "../excluir/deleteEcoponto";
+import { EcoPointList } from "@/app/types/ecopoints/ecopoints";
 
 const Listar = () => {
     const [ecopoints, setEcopoints] = useState<EcoPointList[]>([]);
@@ -30,7 +31,7 @@ const Listar = () => {
 
     const handleEdit = (ecopoint: EcoPointList) => {
         localStorage.setItem('editingEcopoint', JSON.stringify(ecopoint));
-        router.push('/editar');
+        router.push('/ecopoints/editar');
     };
 
     const handleDelete = async (id: string, title: string) => {
@@ -59,7 +60,7 @@ const Listar = () => {
         <ProtectedRoute>
             <div className="flex flex-col w-screen min-h-screen bg-white">
                 <div className="flex items-center w-full" style={{ paddingLeft: '10px', paddingRight: '16px', marginTop: '10px', marginBottom: '20px' }}>
-                    <button 
+                    <button
                         onClick={() => router.push("/menu")}
                         className="transition-colors"
                         style={{
@@ -81,13 +82,13 @@ const Listar = () => {
                     >
                         ← Voltar
                     </button>
-                    
+
                     <div className="flex-1 flex justify-center">
                         <span className="font-bold text-2xl text-black">
                             Lista de Ecopontos
                         </span>
                     </div>
-                    
+
                     <button
                         onClick={() => router.push('/cadastrar')}
                         className="transition-colors"
@@ -126,8 +127,8 @@ const Listar = () => {
                     ) : (
                         <div className="w-full max-w-6xl">
                             {ecopoints && ecopoints.map((ecopoint) => (
-                                <div 
-                                    key={ecopoint.id} 
+                                <div
+                                    key={ecopoint.id}
                                     style={{
                                         border: '2px solid #093A3E',
                                         borderRadius: '8px',
@@ -139,7 +140,7 @@ const Listar = () => {
                                 >
                                     <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start' }}>
                                         <div style={{ flex: '1' }}>
-                                            <h2 
+                                            <h2
                                                 style={{
                                                     fontSize: '20px',
                                                     fontWeight: 'bold',

@@ -1,20 +1,13 @@
 "use client";
-
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import { useRouter } from "next/navigation";
 import axios from "../utils/axios";
 import ProtectedRoute from "../components/ProtectedRoute";
 import { useAuth } from "../hooks/useAuth";
 import { useToastContext } from "../../contexts/ToastContext";
+import { UserDeleteResponse } from "@/app/gerenciar-usuarios/delete";
+import { User } from "@/app/types/user/user";
 
-interface User {
-  id: string;
-  name: string;
-  email: string;
-  role: string;
-  createdAt: string;
-  updatedAt: string;
-}
 
 const GerenciarUsuarios = () => {
   const [formData, setFormData] = useState({
@@ -37,10 +30,31 @@ const GerenciarUsuarios = () => {
   const { user } = useAuth();
   const { showSuccess, showError, showWarning } = useToastContext();
 
+
+  const loadUsers = useCallback(async () => {
+    try {
+      setIsLoadingUsers(true);
+      const response = await axios.get("http://localhost:3001/users");
+      console.log("Usuários carregados:", response.data);
+      setUsers(response.data);
+    } catch (error) {
+      console.error("Erro ao carregar usuários:", error);
+      showError("Erro ao carregar lista de usuários");
+    } finally {
+      setIsLoadingUsers(false);
+    }
+  }, [showError]);
+
+  useEffect(() => {
+    if (user && user.role === 'admin') {
+      loadUsers();
+    }
+  }, [user, loadUsers]);
+
   if (user && user.role !== 'admin') {
     return (
       <div className="flex flex-col items-center w-screen h-screen gap-10 bg-white justify-center">
-        <span className="font-bold text-black text-2xl text-red-600">Acesso negado. Apenas administradores podem acessar esta página.</span>
+        <span className="font-bold text-2xl text-red-600">Acesso negado. Apenas administradores podem acessar esta página.</span>
         <button
           onClick={() => router.push('/menu')}
           className="px-6 py-3"
@@ -58,20 +72,6 @@ const GerenciarUsuarios = () => {
       </div>
     );
   }
-
-  const loadUsers = async () => {
-    try {
-      setIsLoadingUsers(true);
-      const response = await axios.get("http://localhost:3001/users");
-      console.log("Usuários carregados:", response.data);
-      setUsers(response.data);
-    } catch (error: any) {
-      console.error("Erro ao carregar usuários:", error);
-      showError("Erro ao carregar lista de usuários");
-    } finally {
-      setIsLoadingUsers(false);
-    }
-  };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setFormData({
@@ -102,9 +102,13 @@ const GerenciarUsuarios = () => {
       });
       setShowCreateForm(false);
       loadUsers();
-    } catch (error: any) {
+    } catch (error) {
       console.error("Erro ao criar usuário:", error);
-      const errorMessage = error.response?.data?.message || "Erro ao criar usuário";
+      let errorMessage = "Erro ao atualizar usuário";
+      if (typeof error === "object" && error !== null && "response" in error) {
+        const err = error as { response?: { data?: { message?: string } } };
+        errorMessage = err.response?.data?.message || errorMessage;
+      }
       showError(errorMessage);
     } finally {
       setIsLoading(false);
@@ -126,7 +130,7 @@ const GerenciarUsuarios = () => {
     setIsLoading(true);
 
     try {
-      const updateData: any = {
+      const updateData: { name: string; email: string; password?: string } = {
         name: editData.name,
         email: editData.email,
       };
@@ -139,9 +143,13 @@ const GerenciarUsuarios = () => {
       showSuccess("Usuário atualizado com sucesso!");
       setEditingUser(null);
       loadUsers();
-    } catch (error: any) {
+    } catch (error) {
       console.error("Erro ao atualizar usuário:", error);
-      const errorMessage = error.response?.data?.message || "Erro ao atualizar usuário";
+      let errorMessage = "Erro ao atualizar usuário";
+      if (typeof error === "object" && error !== null && "response" in error) {
+        const err = error as { response?: { data?: { message?: string } } };
+        errorMessage = err.response?.data?.message || errorMessage;
+      }
       showError(errorMessage);
     } finally {
       setIsLoading(false);
@@ -159,10 +167,19 @@ const GerenciarUsuarios = () => {
     }
 
     try {
-      await axios.delete(`http://localhost:3001/users/${userId}`);
-      showSuccess("Usuário excluído com sucesso!");
-      loadUsers();
-    } catch (error: any) {
+      await UserDeleteResponse(userId)
+        .then(() => {
+          showSuccess(`Usuário "${userName}" excluído com sucesso!`);
+        })
+        .catch((error) => {
+          console.error("Erro ao excluir usuário:", error);
+          showError("Erro ao excluir usuário");
+        })
+        .finally(() => {
+          setIsLoading(true);
+          loadUsers();
+        });
+    } catch (error) {
       console.error("Erro ao excluir usuário:", error);
       showError("Erro ao excluir usuário");
     }
@@ -177,10 +194,6 @@ const GerenciarUsuarios = () => {
       minute: '2-digit'
     });
   };
-
-  useEffect(() => {
-    loadUsers();
-  }, []);
 
   return (
     <ProtectedRoute>

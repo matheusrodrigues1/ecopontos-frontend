@@ -7,7 +7,6 @@ export default function Home() {
   const router = useRouter();
 
   useEffect(() => {
-    // Redirecionar direto para o mapa
     router.push("/mapa");
   }, [router]);
 

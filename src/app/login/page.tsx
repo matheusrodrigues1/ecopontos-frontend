@@ -39,7 +39,11 @@ const Login = () => {
       }
     } catch (error) {
       showError('Erro ao conectar com o servidor');
-      console.error('Login error:', error);
+      if (error instanceof Error) {
+        console.error('Login error:', error.message);
+      } else {
+        console.error('Login error:', error);
+      }
     } finally {
       setIsLoading(false);
     }

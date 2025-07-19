@@ -1,5 +1,5 @@
-interface EcoPoint {
-    id: string;
+export interface EcoPoint {
+    id?: string;
     title: string;
     cnpj: string;
     opening_hours: string;
@@ -7,11 +7,11 @@ interface EcoPoint {
     accepted_materials: string[];
     address: string;
     coordinates: string;
-    createdAt: string;
-    updatedAt: string;
+    createdAt?: string;
+    updatedAt?: string;
 }
 
-interface EcoPointList {
+export interface EcoPointList {
     id: string;
     title: string;
     cnpj: string;
