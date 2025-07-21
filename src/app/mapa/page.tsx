@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef, useState, useCallback } from 'react';
 import { useRouter } from 'next/navigation';
 
 import prefeituraLogo from "../../../public/prefeitura_arapiraca_logo.png"
@@ -158,7 +158,8 @@ const MapPage = () => {
         }
     };
 
-    const initializeAll = async () => {
+
+    const initializeAll = useCallback(async () => {
         try {
             setIsLoading(true);
             await loadGoogleMapsScript();
@@ -169,12 +170,12 @@ const MapPage = () => {
             setError(error instanceof Error ? error.message : 'Erro ao carregar recursos do mapa');
             setIsLoading(false);
         }
-    };
+    }, [loadGoogleMapsScript, loadEcoPoints, initializeMap]);
 
     useEffect(() => {
         if (!isMounted) return;
         initializeAll();
-    }, [isMounted, initializeAll]);
+    }, [isMounted]);
 
     if (!isMounted) {
         return (
