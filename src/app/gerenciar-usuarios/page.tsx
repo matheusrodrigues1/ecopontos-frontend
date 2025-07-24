@@ -8,6 +8,9 @@ import { useAuth } from "../hooks/useAuth";
 import { useToastContext } from "../../contexts/ToastContext";
 import { UserDeleteResponse } from "@/app/gerenciar-usuarios/delete";
 import { User } from "@/app/types/user/user";
+import getUsers from "./search";
+import registerUser from "./register";
+import updateUser from "./update";
 
 
 const GerenciarUsuarios = () => {
@@ -37,7 +40,7 @@ const GerenciarUsuarios = () => {
   const loadUsers = useCallback(async () => {
     try {
       setIsLoadingUsers(true);
-      const response = await axios.get("http://localhost:3001/users");
+      const response = await getUsers();
       console.log("Usuários carregados:", response.data);
       setUsers(response.data);
     } catch (error) {
@@ -95,7 +98,8 @@ const GerenciarUsuarios = () => {
     setIsLoading(true);
 
     try {
-      await axios.post("http://localhost:3001/auth/register", formData);
+      await registerUser(formData);
+
       showSuccess("Usuário criado com sucesso!");
 
       setFormData({
@@ -142,7 +146,7 @@ const GerenciarUsuarios = () => {
         updateData.password = editData.password;
       }
 
-      await axios.put(`http://localhost:3001/users/${editData.id}`, updateData);
+      await updateUser(editData.id, updateData);
       showSuccess("Usuário atualizado com sucesso!");
       setEditingUser(null);
       loadUsers();
