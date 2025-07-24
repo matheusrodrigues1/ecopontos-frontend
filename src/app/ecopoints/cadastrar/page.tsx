@@ -4,10 +4,13 @@ import React, { useState } from "react";
 import { useRouter } from "next/navigation";
 import { cadastrar } from "./cadastrar";
 
+import { useToastContext } from "@/contexts/ToastContext";
+
 import { EcoPoint } from "@/app/types/ecopoints/ecopoints";
 
 const Cadastrar = () => {
   const router = useRouter();
+  const { showToast } = useToastContext();
   const [formData, setFormData] = useState({
     title: "",
     cnpj: "",
@@ -48,10 +51,9 @@ const Cadastrar = () => {
         coordinates: formData.coordinates
       };
 
-      const response = await cadastrar(payload as EcoPoint);
+      await cadastrar(payload as EcoPoint);
 
-      console.log("Ecoponto cadastrado com sucesso:", response.data);
-      alert("Ecoponto cadastrado com sucesso!");
+      showToast("Ecoponto cadastrado com sucesso!", "success");
 
       setFormData({
         title: "",
@@ -69,12 +71,12 @@ const Cadastrar = () => {
       if (typeof error === "object" && error !== null && "response" in error) {
         const err = error as { response?: { status?: number; data?: { message?: string } } };
         if (err.response?.status === 400) {
-          alert("Erro de validação: " + (err.response?.data?.message || "Verifique os dados e tente novamente."));
+          showToast("Erro de validação: " + (err.response?.data?.message || "Verifique os dados e tente novamente."));
         } else {
-          alert("Erro ao cadastrar ecoponto. Verifique os dados e tente novamente.");
+          showToast("Erro ao cadastrar ecoponto. Verifique os dados e tente novamente.");
         }
       } else {
-        alert("Erro ao cadastrar ecoponto. Verifique os dados e tente novamente.");
+        showToast("Erro ao cadastrar ecoponto. Verifique os dados e tente novamente.");
       }
     } finally {
       setIsLoading(false);
@@ -215,7 +217,7 @@ const Cadastrar = () => {
             <button
               type="submit"
               disabled={isLoading}
-              className="mt-9 self-center h-[40px] w-[200px] !bg-[#093A3E] !text-white !rounded-lg disabled:opacity-50"
+              className="mt-9 self-center h-[40px] w-[200px] !bg-[#093A3E] hover:!bg-[#0c4a4f] !text-white !rounded-lg disabled:opacity-50 transition-colors cursor-pointer"
             >
               {isLoading ? "Cadastrando..." : "Cadastrar"}
             </button>

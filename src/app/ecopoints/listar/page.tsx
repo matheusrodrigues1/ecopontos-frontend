@@ -1,6 +1,8 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
+import ConfirmDialog from "../../components/ConfirmDialog";
+import { useToastContext } from "@/contexts/ToastContext";
 import { useRouter } from "next/navigation";
 import ProtectedRoute from "../../components/ProtectedRoute";
 import { getEcopontos } from "../getEcopoints";
@@ -10,6 +12,9 @@ import { EcoPointList } from "@/app/types/ecopoints/ecopoints";
 const Listar = () => {
     const [ecopoints, setEcopoints] = useState<EcoPointList[]>([]);
     const [isLoading, setIsLoading] = useState(true);
+    const [confirmOpen, setConfirmOpen] = useState(false);
+    const [pendingDelete, setPendingDelete] = useState<{ id: string; title: string } | null>(null);
+    const { showToast } = useToastContext();
     const router = useRouter();
 
     useEffect(() => {
@@ -20,31 +25,36 @@ const Listar = () => {
                 setEcopoints(response);
             } catch (error) {
                 console.error("Erro ao carregar ecopontos:", error);
-                alert("Erro ao carregar lista de ecopontos.");
+                showToast("Erro ao carregar lista de ecopontos.", "error");
             } finally {
                 setIsLoading(false);
             }
         };
-
         fetchEcopoints();
-    }, []);
+    }, [showToast]);
 
     const handleEdit = (ecopoint: EcoPointList) => {
         localStorage.setItem('editingEcopoint', JSON.stringify(ecopoint));
         router.push('/ecopoints/editar');
     };
 
-    const handleDelete = async (id: string, title: string) => {
-        if (!confirm(`Tem certeza que deseja excluir o ecoponto "${title}"?`)) {
-            return;
-        }
+    const handleDeleteClick = (id: string, title: string) => {
+        setPendingDelete({ id, title });
+        setConfirmOpen(true);
+    };
 
+    const handleConfirmDelete = async () => {
+        if (!pendingDelete) return;
         try {
-            await handleDeleteEcoponto(id, title);
-            setEcopoints(ecopoints.filter(ep => ep.id !== id));
+            await handleDeleteEcoponto(pendingDelete.id, pendingDelete.title);
+            setEcopoints(ecopoints.filter(ep => ep.id !== pendingDelete.id));
+            showToast("Ecoponto excluído com sucesso!", "success");
         } catch (error) {
             console.error("Erro ao excluir ecoponto:", error);
-            alert("Erro ao excluir ecoponto.");
+            showToast("Erro ao excluir ecoponto.", "error");
+        } finally {
+            setConfirmOpen(false);
+            setPendingDelete(null);
         }
     };
 
@@ -90,7 +100,7 @@ const Listar = () => {
                     </div>
 
                     <button
-                        onClick={() => router.push('/cadastrar')}
+                        onClick={() => router.push('/ecopoints/cadastrar')}
                         className="transition-colors"
                         style={{
                             backgroundColor: '#093A3E',
@@ -118,7 +128,7 @@ const Listar = () => {
                         <div className="text-center py-16">
                             <p className="text-gray-600 mb-6 text-lg">Nenhum ecoponto cadastrado ainda.</p>
                             <button
-                                onClick={() => router.push('/cadastrar')}
+                                onClick={() => router.push('/ecopoints/cadastrar')}
                                 className="px-8 py-4 bg-[#093A3E] text-white rounded-lg hover:bg-[#0c4a4f] transition-colors duration-200 font-medium text-lg"
                             >
                                 Cadastrar Primeiro Ecoponto
@@ -200,7 +210,7 @@ const Listar = () => {
                                                 ✏️ Editar
                                             </button>
                                             <button
-                                                onClick={() => handleDelete(ecopoint.id, ecopoint.title)}
+                                                onClick={() => handleDeleteClick(ecopoint.id, ecopoint.title)}
                                                 style={{
                                                     padding: '8px 16px',
                                                     backgroundColor: '#dc2626',
@@ -232,6 +242,13 @@ const Listar = () => {
                     )}
                 </div>
             </div>
+            <ConfirmDialog
+                open={confirmOpen}
+                title="Confirmar exclusão"
+                message={pendingDelete ? `Tem certeza que deseja excluir o ecoponto "${pendingDelete.title}"?` : ""}
+                onConfirm={handleConfirmDelete}
+                onCancel={() => { setConfirmOpen(false); setPendingDelete(null); }}
+            />
         </ProtectedRoute>
     );
 };

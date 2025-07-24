@@ -1,5 +1,6 @@
 "use client";
 import React, { useState, useEffect, useCallback } from "react";
+import ConfirmDialog from "../components/ConfirmDialog";
 import { useRouter } from "next/navigation";
 import axios from "../utils/axios";
 import ProtectedRoute from "../components/ProtectedRoute";
@@ -22,6 +23,8 @@ const GerenciarUsuarios = () => {
     password: "",
   });
   const [users, setUsers] = useState<User[]>([]);
+  const [confirmOpen, setConfirmOpen] = useState(false);
+  const [pendingDelete, setPendingDelete] = useState<{ id: string; name: string } | null>(null);
   const [isLoading, setIsLoading] = useState(false);
   const [isLoadingUsers, setIsLoadingUsers] = useState(true);
   const [showCreateForm, setShowCreateForm] = useState(false);
@@ -156,32 +159,29 @@ const GerenciarUsuarios = () => {
     }
   };
 
-  const handleDelete = async (userId: string, userName: string) => {
+  const handleDeleteClick = (userId: string, userName: string) => {
     if (userId === user?.id) {
       showWarning("Você não pode excluir sua própria conta!");
       return;
     }
+    setPendingDelete({ id: userId, name: userName });
+    setConfirmOpen(true);
+  };
 
-    if (!confirm(`Tem certeza que deseja excluir o usuário "${userName}"?`)) {
-      return;
-    }
-
+  const handleConfirmDelete = async () => {
+    if (!pendingDelete) return;
     try {
-      await UserDeleteResponse(userId)
-        .then(() => {
-          showSuccess(`Usuário "${userName}" excluído com sucesso!`);
-        })
-        .catch((error) => {
-          console.error("Erro ao excluir usuário:", error);
-          showError("Erro ao excluir usuário");
-        })
-        .finally(() => {
-          setIsLoading(true);
-          loadUsers();
-        });
+      await UserDeleteResponse(pendingDelete.id);
+      showSuccess(`Usuário "${pendingDelete.name}" excluído com sucesso!`);
+      setConfirmOpen(false);
+      setPendingDelete(null);
+      setIsLoading(true);
+      loadUsers();
     } catch (error) {
       console.error("Erro ao excluir usuário:", error);
       showError("Erro ao excluir usuário");
+      setConfirmOpen(false);
+      setPendingDelete(null);
     }
   };
 
@@ -500,7 +500,7 @@ const GerenciarUsuarios = () => {
                                 </button>
                                 {userData.id !== user?.id && (
                                   <button
-                                    onClick={() => handleDelete(userData.id, userData.name)}
+                                    onClick={() => handleDeleteClick(userData.id, userData.name)}
                                     style={{
                                       backgroundColor: '#FF6347',
                                       color: 'white',
@@ -534,6 +534,13 @@ const GerenciarUsuarios = () => {
           )}
         </div>
       </div>
+      <ConfirmDialog
+        open={confirmOpen}
+        title="Confirmar exclusão"
+        message={pendingDelete ? `Tem certeza que deseja excluir o usuário "${pendingDelete.name}"?` : ""}
+        onConfirm={handleConfirmDelete}
+        onCancel={() => { setConfirmOpen(false); setPendingDelete(null); }}
+      />
     </ProtectedRoute>
   );
 };

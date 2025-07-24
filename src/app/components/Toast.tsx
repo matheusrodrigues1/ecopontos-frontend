@@ -15,19 +15,18 @@ const Toast: React.FC<ToastProps> = ({
   onClose,
 }) => {
   const getToastStyles = () => {
-    const baseStyles = "px-4 py-3 rounded-lg shadow-lg text-white font-medium transition-all duration-300 max-w-sm";
-    
+    const baseStyles = "px-4 py-3 rounded-lg shadow-lg font-medium transition-all duration-300 max-w-sm";
     switch (type) {
       case "success":
-        return `${baseStyles} bg-green-500`;
+        return `${baseStyles} bg-green-600 text-white`;
       case "error":
-        return `${baseStyles} bg-red-500`;
+        return `${baseStyles} bg-red-500 text-white`;
       case "warning":
-        return `${baseStyles} bg-yellow-500`;
+        return `${baseStyles} bg-yellow-500 text-white`;
       case "info":
-        return `${baseStyles} bg-blue-500`;
+        return `${baseStyles} bg-blue-500 text-white`;
       default:
-        return `${baseStyles} bg-gray-500`;
+        return `${baseStyles} bg-gray-500 text-white`;
     }
   };
 

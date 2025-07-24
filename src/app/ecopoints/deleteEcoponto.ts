@@ -1,4 +1,4 @@
-import axios from "axios";
+import axios from "@/app/utils/axios";
 
 export const deleteEco = async (id: string) => {
     try {

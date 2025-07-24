@@ -21,3 +21,13 @@ export interface EcoPointList {
     address: string;
     coordinates: string;
 }
+
+export interface EcopointPayload {
+    title: string;
+    cnpj: string;
+    opening_hours: string;
+    interval: string;
+    accepted_materials: string[];
+    address: string;
+    coordinates: string;
+}
