@@ -1,0 +1,97 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 5rem; /* !pt-20 */
+  width: 100vw;
+  height: 100vh;
+  background-color: white;
+}
+
+.logoWrapper {
+  width: 59px;
+  height: 57px;
+  position: relative;
+}
+
+.title {
+  text-align: center;
+}
+
+.titleEco {
+  font-size: 60px;
+  color: #093A3E;
+  font-family: 'Shrikhand', cursive;
+  line-height: 22px;
+  letter-spacing: 0.01em;
+}
+
+.titleArapiraca {
+  font-size: 60px;
+  color: #093A3E;
+  font-family: 'Roboto Black', sans-serif;
+  line-height: 22px;
+  font-variation-settings: 'wght' 900;
+  text-align: center;
+  letter-spacing: -0.04em;
+}
+
+.button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 381px;
+  height: 53px;
+  border-radius: 8px;
+  color: white;
+  border: none;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: 500;
+  transition: background-color 0.2s;
+  margin-bottom: 8px;
+}
+
+.buttonEcopoints {
+  background-color: #093A3E;
+}
+
+.buttonEcopoints:hover {
+  background-color: #0c4a4f;
+}
+
+.buttonAdmin {
+  background-color: #16a34a;
+}
+
+.buttonAdmin:hover {
+  background-color: #15803d;
+}
+
+.divider {
+  width: 100%;
+  height: 1px;
+  background-color: #d1d5db; /* gray-300 */
+  margin: 1rem 0;
+}
+
+.homeButton {
+  position: absolute;
+  top: 1rem;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: #2F4F4F;
+  border-radius: 8px;
+  border: 1px solid #e5e7eb;
+  color: white;
+  padding: 12px 20px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.homeButton:hover {
+  background-color: white;
+  color: #374151;
+}

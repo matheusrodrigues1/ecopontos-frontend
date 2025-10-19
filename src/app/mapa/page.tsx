@@ -7,6 +7,7 @@ import prefeituraLogo from "../../../public/prefeitura_arapiraca_logo.png"
 import { getEcopontos } from '../ecopoints/getEcopoints';
 import { LoadGoogleMapsScript } from './loadMaps';
 import { EcoPoint } from '@/app/types/ecopoints/ecopoints';
+import styles from './style.module.css';
 
 const MapPage = () => {
     const mapRef = useRef<HTMLDivElement>(null);
@@ -218,6 +219,29 @@ const MapPage = () => {
                         </span>
                     </div>
 
+                    <div className={styles.botoesNav}>
+                        <button
+                            onClick={() => router.push('/sobre-nos')}
+                            className={`${styles.botao} ${styles.sobreNosBtn}`}
+                        >
+                            Sobre Nós
+                        </button>
+
+                        <button
+                            onClick={() => router.push('/noticias')}
+                            className={`${styles.botao} ${styles.noticiasBtn}`}
+                        >
+                            Notícias
+                        </button>
+
+                        <button
+                            onClick={() => router.push('/contato')}
+                            className={`${styles.botao} ${styles.contatoBtn}`}
+                        >
+                            Contato
+                        </button>
+                    </div>
+
                     <div className="flex-shrink-0 flex items-center gap-4">
                         {!isLoading && !error && (
                             <span
@@ -303,40 +327,44 @@ const MapPage = () => {
                                     </button>
                                 </>
                             ) : (
-                                <button
+                                    <button
                                     onClick={() => router.push('/login')}
-                                    className="transition-all duration-200 ease-in-out"
-                                    style={{
-                                        backgroundColor: '#16a34a',
-                                        color: 'white',
-                                        padding: '5px 5px',
-                                        borderRadius: '8px',
-                                        fontSize: '14px',
-                                        fontWeight: '500',
-                                        border: 'none',
-                                        cursor: 'pointer',
-                                        boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06)',
-                                        minWidth: '60px',
-                                        textAlign: 'center'
-                                    }}
-                                    onMouseEnter={(e) => {
-                                        e.currentTarget.style.backgroundColor = '#15803d';
-                                        e.currentTarget.style.transform = 'translateY(-1px)';
-                                        e.currentTarget.style.boxShadow = '0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05)';
-                                    }}
-                                    onMouseLeave={(e) => {
-                                        e.currentTarget.style.backgroundColor = '#16a34a';
-                                        e.currentTarget.style.transform = 'translateY(0)';
-                                        e.currentTarget.style.boxShadow = '0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06)';
-                                    }}
-                                >
+                                    className={styles.loginBtn}
+                                    >
                                     Login
-                                </button>
+                                    </button>
                             )}
                         </div>
                     </div>
                 </div>
             </header>
+
+            <section className={styles.infoSection}>
+                <h2>Como funcionam os Ecopontos?</h2>
+                <p>
+                    Os Ecopontos são locais criados para receber materiais recicláveis como vidro, papel, plástico e metal. 
+                    Eles ajudam a reduzir o lixo nas ruas e contribuem para a preservação do meio ambiente. 
+                    Basta separar corretamente os resíduos e levá-los ao Ecoponto mais próximo.
+                </p>
+            </section>
+
+            <section className={styles.benefitsSection}>
+                <h2>Por que utilizar os Ecopontos?</h2>
+                <div className={styles.benefitsGrid}>
+                    <div>
+                        ♻️ <strong>Reciclagem</strong>
+                        <p>Ajude a transformar resíduos em novos produtos.</p>
+                    </div>
+                    <div>
+                        🌍 <strong>Meio Ambiente</strong>
+                        <p>Reduza o impacto ambiental da sua cidade.</p>
+                    </div>
+                    <div>
+                        👨‍👩‍👧‍👦 <strong>Comunidade</strong>
+                        <p>Contribua para uma Arapiraca mais limpa e sustentável.</p>
+                    </div>
+                </div>
+            </section>
 
             {isLoading && !error && (
                 <div className="flex-1 flex items-center justify-center">
@@ -373,8 +401,11 @@ const MapPage = () => {
             )}
 
             {!error && (
-                <div className="flex-1 relative">
-                    <div ref={mapRef} className="w-full h-full" />
+                <div className="relative w-full max-w-4xl mx-auto my-4">
+                    <div
+                        ref={mapRef}
+                        className="w-full h-200 md:h-120 rounded-lg shadow-md"
+                    />
 
                     <style jsx global>{`
                         /* Ocultar seta de voltar específica da aplicação */
@@ -418,6 +449,25 @@ const MapPage = () => {
                     `}</style>
                 </div>
             )}
+
+            {/* {!error && (
+            <div className={styles.mapContainer}>
+                <div
+                ref={mapRef}
+                className={styles.map}
+                />
+            </div>
+            )} */}
+
+            <section className={styles.callToAction}>
+                <h2>Participe você também!</h2>
+                <p>Visite o Ecoponto mais próximo e ajude a construir um futuro mais verde para Arapiraca.</p>
+                <button onClick={() => router.push('/sobre-nos')}>Saiba mais</button>
+            </section>
+
+            <footer className={styles.footer}>
+                <p>© 2025Prefeitura de Arapiraca — Projeto Ecopontos.</p>
+            </footer>
         </div>
     );
 };

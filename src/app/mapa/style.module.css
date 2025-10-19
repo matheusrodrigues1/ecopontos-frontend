@@ -1,0 +1,151 @@
+.botoesNav {
+    display: flex;
+    gap: 12px;
+    margin-left: 16px;
+}
+
+/* Estilo base para todos os botões */
+.botao {
+    padding: 8px 16px;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 500;
+    color: white;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.2s ease-in-out;
+}
+
+/* Botão "Sobre Nós" */
+.sobreNosBtn {
+    background-color: #2563eb;
+}
+.sobreNosBtn:hover {
+    background-color: #1d4ed8;
+}
+
+/* Botão "Notícias" */
+.noticiasBtn {
+    background-color: #059669;
+}
+.noticiasBtn:hover {
+    background-color: #047857;
+}
+
+/* Botão "Contato" */
+.contatoBtn {
+    background-color: #f59e0b;
+}
+.contatoBtn:hover {
+    background-color: #d97706;
+}
+
+
+.infoSection {
+    background-color: #f8fafc;
+    padding: 40px 20px;
+    text-align: center;
+    color: #093a3e;
+}
+
+.infoSection h2 {
+    font-size: 2rem;
+    margin-bottom: 12px;
+}
+
+.infoSection p {
+    font-size: 1.1rem;
+    max-width: 800px;
+    margin: 0 auto;
+    color: #334155;
+    line-height: 1.7;
+}
+
+.benefitsSection {
+    background: white;
+    padding: 50px 20px;
+    text-align: center;
+}
+
+.benefitsSection h2 {
+    font-size: 2rem;
+    margin-bottom: 24px;
+    color: #093a3e;
+}
+
+.benefitsGrid {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    flex-wrap: wrap;
+}
+
+.benefitsGrid div {
+    background: #093a3e;
+    border-radius: 12px;
+    padding: 20px;
+    width: 240px;
+    text-align: center;
+    transition: transform 0.2s ease;
+}
+
+.benefitsGrid div:hover {
+    transform: scale(1.05);
+}
+
+.callToAction {
+    background: #093a3e;
+    color: white;
+    text-align: center;
+    padding: 60px 20px;
+}
+
+.callToAction button {
+    background: #fbbf24;
+    border: none;
+    padding: 12px 24px;
+    border-radius: 8px;
+    font-weight: bold;
+    color: #093a3e;
+    cursor: pointer;
+    margin-top: 16px;
+    transition: background 0.3s ease;
+}
+
+.callToAction button:hover {
+    background: #f59e0b;
+}
+
+.footer {
+    background: #0f2f33;
+    color: white;
+    text-align: center;
+    padding: 16px;
+    font-size: 0.9rem;
+}
+
+
+.loginBtn {
+  background-color: #16a34a;
+  color: white;
+  padding: 5px 5px;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 500;
+  border: none;
+  cursor: pointer;
+  min-width: 60px;
+  text-align: center;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1),
+              0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  transition: all 0.2s ease-in-out;
+}
+
+.loginBtn:hover {
+  background-color: #15803d;
+  transform: translateY(-1px);
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1),
+              0 4px 6px -2px rgba(0, 0, 0, 0.05);
+}
+
+
