@@ -1,0 +1,26 @@
+.sobreNos {
+    background-color: white; /* fundo branco */
+    padding: 24px;           /* mais espaço interno */
+    border-radius: 12px;     /* cantos arredondados */
+    text-align: center;      /* centraliza título e conteúdo */
+    font-size: 18px;         /* tamanho da letra do parágrafo */
+    line-height: 1.8;        /* espaçamento entre linhas */
+    color: #1f2937;          /* cinza escuro */
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1); /* sombra suave */
+    max-width: 800px;        /* largura máxima */
+    margin: 32px auto;       /* centralizado com espaçamento em cima/baixo */
+}
+
+.sobreNosTitulo {
+    font-size: 36px;
+    font-weight: 700;
+    margin-bottom: 16px;
+    color: #093A3E; /* cor do título mais chamativa */
+}
+
+.sobreNosTexto {
+    font-size: 18px;
+    line-height: 1.8;
+    text-align: justify; /* deixa o texto alinhado dos dois lados */
+    color: #1f2937;
+}
