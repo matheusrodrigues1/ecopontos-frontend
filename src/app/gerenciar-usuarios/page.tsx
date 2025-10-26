@@ -11,7 +11,7 @@ import { User } from "@/app/types/user/user";
 import getUsers from "./search";
 import registerUser from "./register";
 import updateUser from "./update";
-
+import styles from "./style.module.css";
 
 const GerenciarUsuarios = () => {
   const [formData, setFormData] = useState({
@@ -36,7 +36,6 @@ const GerenciarUsuarios = () => {
   const { user } = useAuth();
   const { showSuccess, showError, showWarning } = useToastContext();
 
-
   const loadUsers = useCallback(async () => {
     try {
       setIsLoadingUsers(true);
@@ -59,20 +58,11 @@ const GerenciarUsuarios = () => {
 
   if (user && user.role !== 'admin') {
     return (
-      <div className="flex flex-col items-center w-screen h-screen gap-10 bg-white justify-center">
-        <span className="font-bold text-2xl text-red-600">Acesso negado. Apenas administradores podem acessar esta página.</span>
-        <button
-          onClick={() => router.push('/menu')}
-          className="px-6 py-3"
-          style={{
-            backgroundColor: '#093A3E',
-            color: '#0000000',
-            borderRadius: '6px',
-            fontSize: '14px',
-            fontWeight: '500',
-            cursor: 'pointer',
-          }}
-        >
+      <div className={styles.container} style={{ justifyContent: "center", gap: "1rem" }}>
+        <span className={styles.title} style={{ color: "#dc2626", fontSize: "1.5rem" }}>
+          Acesso negado. Apenas administradores podem acessar esta página.
+        </span>
+        <button onClick={() => router.push('/menu')} className={styles.accessButton}>
           Voltar ao Menu
         </button>
       </div>
@@ -201,60 +191,31 @@ const GerenciarUsuarios = () => {
 
   return (
     <ProtectedRoute>
-      <div className="flex flex-col items-center w-screen min-h-screen gap-6 bg-white py-8">
-        <div className="flex items-center justify-between w-full max-w-6xl px-4 !pt-4">
-          <button
-            onClick={() => router.push('/menu')}
-            className="px-10 py-3"
-            style={{
-              backgroundColor: '#093A3E',
-              color: 'white',
-              border: '5px solid transparent',
-              borderRadius: '8px',
-              fontSize: '16px',
-              fontWeight: '500',
-              cursor: 'pointer',
-            }}
-            onMouseEnter={(e) => {
-              e.currentTarget.style.backgroundColor = '#0c4a4f';
-            }}
-            onMouseLeave={(e) => {
-              e.currentTarget.style.backgroundColor = '#093A3E';
-            }}
-          >
+      <div className={styles.container}>
+        <div className={styles.header}>
+          <button onClick={() => router.push('/menu')} className={styles.backButton}>
             ← Voltar
           </button>
-          <span className="font-bold text-3xl text-black">Gerenciar Usuários</span>
+
+          <span className={styles.title}>Gerenciar Usuários</span>
+
           <button
             onClick={() => setShowCreateForm(!showCreateForm)}
-            className="px-6 py-3 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors duration-200 font-medium"
-            style={{
-              backgroundColor: showCreateForm ? '#093A3E' : '#0c4a4f',
-              border: '5px solid transparent',
-              borderRadius: '8px',
-              cursor: 'pointer',
-              fontSize: '16px',
-            }}
-            onMouseEnter={(e) => {
-              e.currentTarget.style.backgroundColor = showCreateForm ? '#0c4a4f' : '#093A3E';
-            }}
-            onMouseLeave={(e) => {
-              e.currentTarget.style.backgroundColor = showCreateForm ? '#093A3E' : '#0c4a4f';
-            }}
+            className={styles.botaoCadastrar}
           >
             {showCreateForm ? 'Cancelar' : 'Criar Usuário'}
           </button>
         </div>
 
         {showCreateForm && (
-          <div className="w-full max-w-md p-8 bg-white border border-gray-200 rounded-xl shadow-lg">
-            <h2 className="text-2xl font-bold text-center text-[#093A3E] mb-6">
+          <div className={styles.formContainer}>
+            <h2 className={styles.title} style={{ fontSize: 20, textAlign: "center", color: "#093A3E", marginBottom: 16 }}>
               Criar Novo Usuário
             </h2>
 
             <form onSubmit={handleSubmit} className="space-y-6">
               <div>
-                <label htmlFor="name" className="block text-sm font-medium mb-2 text-gray-700">
+                <label htmlFor="name" style={{ display: "block", marginBottom: 8, fontWeight: 500 }}>
                   Nome
                 </label>
                 <input
@@ -264,14 +225,13 @@ const GerenciarUsuarios = () => {
                   value={formData.name}
                   onChange={handleChange}
                   required
-                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#093A3E] focus:border-transparent"
-                  style={{ color: '#111827' }}
+                  className={styles.input}
                   placeholder="Digite o nome do usuário"
                 />
               </div>
 
               <div>
-                <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-2">
+                <label htmlFor="email" style={{ display: "block", marginBottom: 8, fontWeight: 500 }}>
                   Email
                 </label>
                 <input
@@ -281,14 +241,13 @@ const GerenciarUsuarios = () => {
                   value={formData.email}
                   onChange={handleChange}
                   required
-                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#093A3E] focus:border-transparent"
-                  style={{ color: '#111827' }}
+                  className={styles.input}
                   placeholder="Digite o email do usuário"
                 />
               </div>
 
               <div>
-                <label htmlFor="password" className="block text-sm font-medium text-gray-700 mb-2">
+                <label htmlFor="password" style={{ display: "block", marginBottom: 8, fontWeight: 500 }}>
                   Senha
                 </label>
                 <input
@@ -299,8 +258,7 @@ const GerenciarUsuarios = () => {
                   onChange={handleChange}
                   required
                   minLength={6}
-                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#093A3E] focus:border-transparent"
-                  style={{ color: '#111827' }}
+                  className={styles.input}
                   placeholder="Digite a senha (mínimo 6 caracteres)"
                 />
               </div>
@@ -308,21 +266,7 @@ const GerenciarUsuarios = () => {
               <button
                 type="submit"
                 disabled={isLoading}
-                className="w-full py-3 px-4"
-                style={{
-                  backgroundColor: '#093A3E',
-                  color: 'white',
-                  borderRadius: '8px',
-                  fontSize: '16px',
-                  fontWeight: '500',
-                  cursor: 'pointer',
-                }}
-                onMouseEnter={(e) => {
-                  e.currentTarget.style.backgroundColor = showCreateForm ? '#0c4a4f' : '#093A3E';
-                }}
-                onMouseLeave={(e) => {
-                  e.currentTarget.style.backgroundColor = showCreateForm ? '#093A3E' : '#0c4a4f';
-                }}
+                className={styles.submitButton}
               >
                 {isLoading ? "Criando..." : "Criar Usuário"}
               </button>
@@ -330,214 +274,131 @@ const GerenciarUsuarios = () => {
           </div>
         )}
 
-        <div className="w-full max-w-6xl">
-          <h2 className="text-2xl font-bold text-[#093A3E] mb-6">Lista de Usuários</h2>
+        <div style={{ width: "100%", maxWidth: 1224, marginTop: 32 }}>
+          <h2 style={{ fontSize: "1.5rem", fontWeight: 700, color: "#093A3E", marginBottom: 24 }}>Lista de Usuários</h2>
 
           {isLoadingUsers ? (
-            <div className="flex justify-center items-center py-12">
-              <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-[#093A3E]"></div>
-              <span className="ml-4 text-gray-600">Carregando usuários...</span>
+            <div style={{ display: "flex", justifyContent: "center", alignItems: "center", padding: "3rem 0" }}>
+              <div className={styles.spinner} />
+              <span style={{ marginLeft: 16, color: "#4b5563" }}>Carregando usuários...</span>
             </div>
           ) : (
-            <div className="bg-white rounded-lg shadow-lg overflow-hidden border border-gray-200">
-              {users.length === 0 ? (
-                <div className="p-8 text-center text-gray-500">
-                  <p className="text-lg">Nenhum usuário encontrado.</p>
-                </div>
-              ) : (
-                <div className="overflow-x-auto">
-                  <table className="w-full">
-                    <thead className="bg-gray-50">
-                      <tr>
-                        <th className="px-6 py-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                          Nome
-                        </th>
-                        <th className="px-6 py-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                          Email
-                        </th>
-                        <th className="px-6 py-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                          Tipo
-                        </th>
-                        <th className="px-6 py-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                          Criado em
-                        </th>
-                        <th className="px-6 py-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                          Ações
-                        </th>
-                      </tr>
-                    </thead>
-                    <tbody className="bg-white divide-y divide-gray-200">
-                      {users.map((userData) => (
-                        <tr key={userData.id} className="hover:bg-gray-50">
-                          <td className="px-6 py-4 whitespace-nowrap">
-                            {editingUser === userData.id ? (
-                              <input
-                                type="text"
-                                name="name"
-                                value={editData.name}
-                                onChange={handleEditChange}
-                                className="w-full px-2 py-1 border border-gray-300 rounded"
-                                style={{ color: '#111827' }}
-                              />
-                            ) : (
-                              <div className="flex items-center">
-                                <div className="flex-shrink-0 h-10 w-10">
-                                  <div className="h-10 w-10 rounded-full bg-[#093A3E] flex items-center justify-center">
-                                    <span className="text-white font-medium">
-                                      {userData.name.charAt(0).toUpperCase()}
-                                    </span>
-                                  </div>
-                                </div>
-                                <div className="ml-4">
-                                  <div className="text-sm font-medium text-gray-900">
-                                    {userData.name}
-                                  </div>
-                                </div>
-                              </div>
-                            )}
-                          </td>
-                          <td className="px-6 py-4 whitespace-nowrap">
-                            {editingUser === userData.id ? (
-                              <input
-                                type="email"
-                                name="email"
-                                value={editData.email}
-                                onChange={handleEditChange}
-                                className="w-full px-2 py-1 border border-gray-300 rounded"
-                                style={{ color: '#111827' }}
-                              />
-                            ) : (
-                              <div className="text-sm text-gray-900">{userData.email}</div>
-                            )}
-                          </td>
-                          <td className="px-6 py-4 whitespace-nowrap">
-                            <span className={`inline-flex px-2 py-1 text-xs font-semibold rounded-full ${userData.role === 'admin'
-                              ? 'bg-red-100 text-red-800'
-                              : 'bg-green-100 text-green-800'
-                              }`}>
-                              {userData.role === 'admin' ? 'Administrador' : 'Usuário'}
-                            </span>
-                          </td>
-                          <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                            {formatDate(userData.createdAt)}
-                          </td>
-                          <td className="px-6 py-4 whitespace-nowrap text-sm font-medium">
-                            {editingUser === userData.id ? (
-                              <div className="flex gap-2">
-                                <form onSubmit={handleEditSubmit} className="flex gap-2">
-                                  <input
-                                    type="password"
-                                    name="password"
-                                    value={editData.password}
-                                    onChange={handleEditChange}
-                                    placeholder="Nova senha (opcional)"
-                                    className="px-2 py-1 border border-gray-300 rounded text-xs"
-                                    style={{ color: '#111827' }}
-                                  />
-                                  <button
-                                    type="submit"
-                                    disabled={isLoading}
-                                    style={{
-                                      backgroundColor: '#ADFF2F',
-                                      color: '#111827',
-                                      borderRadius: '8px',
-                                      padding: '0.5rem 1rem',
-                                      fontSize: '14px',
-                                      fontWeight: '500',
-                                      cursor: 'pointer',
-                                      transition: 'background-color 0.2s'
-                                    }}
-                                    onMouseEnter={(e) => {
-                                      e.currentTarget.style.backgroundColor = '#9ACD32';
-                                    }}
-                                    onMouseLeave={(e) => {
-                                      e.currentTarget.style.backgroundColor = '#ADFF2F';
-                                    }}
-                                  >
-                                    Salvar
-                                  </button>
-                                </form>
-                                <button
-                                  onClick={() => setEditingUser(null)}
-                                  style={{
-                                    backgroundColor: '#f3f4f6',
-                                    color: '#111827',
-                                    borderRadius: '8px',
-                                    padding: '0.5rem 1rem',
-                                    fontSize: '14px',
-                                    fontWeight: '500',
-                                    cursor: 'pointer',
-                                    transition: 'background-color 0.2s'
-                                  }}
-                                  onMouseEnter={(e) => {
-                                    e.currentTarget.style.backgroundColor = '#e5e7eb';
-                                  }}
-                                  onMouseLeave={(e) => {
-                                    e.currentTarget.style.backgroundColor = '#f3f4f6';
-                                  }}
-                                >
-                                  Cancelar
-                                </button>
-                              </div>
-                            ) : (
-                              <div className="flex gap-2">
-                                <button
-                                  onClick={() => handleEdit(userData)}
-                                  style={{
-                                    backgroundColor: '#00CED1',
-                                    color: '#111827',
-                                    borderRadius: '8px',
-                                    padding: '0.5rem 1rem',
-                                    fontSize: '14px',
-                                    fontWeight: '500',
-                                    cursor: 'pointer',
-                                    transition: 'background-color 0.2s'
-                                  }}
-                                  onMouseEnter={(e) => {
-                                    e.currentTarget.style.backgroundColor = '#008B8B';
-                                  }}
-                                  onMouseLeave={(e) => {
-                                    e.currentTarget.style.backgroundColor = '#00CED1';
-                                  }}
-                                >
-                                  Editar
-                                </button>
-                                {userData.id !== user?.id && (
-                                  <button
-                                    onClick={() => handleDeleteClick(userData.id, userData.name)}
-                                    style={{
-                                      backgroundColor: '#FF6347',
-                                      color: 'white',
-                                      borderRadius: '8px',
-                                      padding: '0.5rem 1rem',
-                                      fontSize: '14px',
-                                      fontWeight: '500',
-                                      cursor: 'pointer',
-                                      transition: 'background-color 0.2s'
-                                    }}
-                                    onMouseEnter={(e) => {
-                                      e.currentTarget.style.backgroundColor = '#800000';
-                                    }}
-                                    onMouseLeave={(e) => {
-                                      e.currentTarget.style.backgroundColor = '#FF6347';
-                                    }}
-                                  >
-                                    Excluir
-                                  </button>
-                                )}
-                              </div>
-                            )}
-                          </td>
+            <div className={styles.userListContainer}>
+              <div style={{ backgroundColor: "#fff", borderRadius: 12, boxShadow: "0 4px 6px rgba(0,0,0,0.06)", overflow: "hidden", border: "1px solid #E5E7EB" }}>
+                {(!users || users.length === 0) ? (
+                  <div className={styles.emptyState}>
+                    <p style={{ fontSize: "1.125rem", marginBottom: 8 }}>Nenhum usuário encontrado.</p>
+                    <p style={{ color: "#9CA3AF" }}>Clique em "Criar Usuário" para adicionar um novo usuário.</p>
+                  </div>
+                ) : (
+                  <div style={{ overflowX: "auto" }}>
+                    <table className={styles.userTable}>
+                      <thead className={styles.tableHeader}>
+                        <tr style={{ backgroundColor: "#000"}}>
+                          <th className={styles.tableCell}>Nome</th>
+                          <th className={styles.tableCell}>Email</th>
+                          <th className={styles.tableCell}>Tipo</th>
+                          <th className={styles.tableCell}>Criado em</th>
+                          <th className={styles.tableCell}>Ações</th>
                         </tr>
-                      ))}
-                    </tbody>
-                  </table>
-                </div>
-              )}
+                      </thead>
+                      <tbody className="bg-white divide-y divide-gray-200">
+                        {users.map((userData, idx) => {
+                          const key = (userData as any).id || (userData as any)._id || `user-${idx}`;
+                          return (
+                            <tr key={key} className={styles.tableRow ?? ""}>
+                              <td className={styles.tableCell}>
+                                {editingUser === userData.id ? (
+                                  <input
+                                    type="text"
+                                    name="name"
+                                    value={editData.name}
+                                    onChange={handleEditChange}
+                                    className={styles.editInput}
+                                  />
+                                ) : (
+                                  <div style={{ display: "flex", alignItems: "center" }}>
+                                    <div className={styles.avatar}>
+                                      <span>{userData.name.charAt(0).toUpperCase()}</span>
+                                    </div>
+                                    <div style={{ marginLeft: 12 }}>
+                                      <div style={{ fontSize: 14, fontWeight: 600, color: "#111827" }}>{userData.name}</div>
+                                    </div>
+                                  </div>
+                                )}
+                              </td>
+
+                              <td className={styles.tableCell}>
+                                {editingUser === userData.id ? (
+                                  <input
+                                    type="email"
+                                    name="email"
+                                    value={editData.email}
+                                    onChange={handleEditChange}
+                                    className={styles.editInput}
+                                  />
+                                ) : (
+                                  <div style={{ fontSize: 14, color: "#111827" }}>{userData.email}</div>
+                                )}
+                              </td>
+
+                              <td className={styles.tableCell}>
+                                <span className={`${styles.badge} ${userData.role === 'admin' ? styles.adminBadge : styles.userBadge}`}>
+                                  {userData.role === 'admin' ? 'Administrador' : 'Usuário'}
+                                </span>
+                              </td>
+
+                              <td className={styles.tableCell} style={{ color: "#6b7280" }}>
+                                {formatDate(userData.createdAt)}
+                              </td>
+
+                              <td className={styles.tableCell}>
+                                {editingUser === userData.id ? (
+                                  <div className={styles.actions}>
+                                    <form onSubmit={handleEditSubmit} style={{ display: "flex", gap: 8 }}>
+                                      <input
+                                        type="password"
+                                        name="password"
+                                        value={editData.password}
+                                        onChange={handleEditChange}
+                                        placeholder="Nova senha (opcional)"
+                                        className={styles.editInput}
+                                        style={{ width: 180 }}
+                                      />
+                                      <button type="submit" disabled={isLoading} className={styles.saveButton}>
+                                        Salvar
+                                      </button>
+                                    </form>
+                                    <button onClick={() => setEditingUser(null)} className={styles.cancelButton}>
+                                      Cancelar
+                                    </button>
+                                  </div>
+                                ) : (
+                                  <div className={styles.actions}>
+                                    <button onClick={() => handleEdit(userData)} className={styles.editButton}>
+                                      Editar
+                                    </button>
+                                    {userData.id !== user?.id && (
+                                      <button onClick={() => handleDeleteClick(userData.id, userData.name)} className={styles.deleteButton}>
+                                        Excluir
+                                      </button>
+                                    )}
+                                  </div>
+                                )}
+                              </td>
+                            </tr>
+                          );
+                        })}
+                      </tbody>
+                    </table>
+                  </div>
+                )}
+              </div>
             </div>
           )}
         </div>
       </div>
+
       <ConfirmDialog
         open={confirmOpen}
         title="Confirmar exclusão"

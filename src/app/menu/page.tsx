@@ -59,7 +59,7 @@ const Menu = () => {
 
               <button
                 className={`${styles.button} ${styles.buttonAdmin}`}
-                onClick={() => router.push("/gerenciar-usuarios")}
+                onClick={() => router.push("/cadastrar-empresa")}
               >
                 Cadastrar empresa
               </button>
