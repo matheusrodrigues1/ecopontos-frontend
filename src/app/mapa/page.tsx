@@ -458,7 +458,23 @@ const MapPage = () => {
                 />
             </div>
             )} */}
-
+            <section className={styles.testimonialsSection}>
+                <h2>O que dizem sobre os Ecopontos?</h2>
+                <div className={styles.testimonialsGrid}>
+                    <div className={styles.testimonialCard}>
+                        <p>“Levar meus recicláveis para o Ecoponto virou um hábito. É rápido, prático e ainda ajudo o meio ambiente!”</p>
+                        <span>- Maria Souza, moradora do centro</span>
+                    </div>
+                    <div className={styles.testimonialCard}>
+                        <p>“Os Ecopontos facilitaram muito o descarte correto de materiais. A cidade ficou muito mais limpa!”</p>
+                        <span>- João Pereira, comerciante</span>
+                    </div>
+                    <div className={styles.testimonialCard}>
+                        <p>“Eu nem imaginava que dava para reciclar tanta coisa. Hoje ensino meus filhos a separar o lixo em casa.”</p>
+                        <span>- Ana Oliveira, professora</span>
+                    </div>
+                </div>
+            </section>
             <section className={styles.callToAction}>
                 <h2>Participe você também!</h2>
                 <p>Visite o Ecoponto mais próximo e ajude a construir um futuro mais verde para Arapiraca.</p>
