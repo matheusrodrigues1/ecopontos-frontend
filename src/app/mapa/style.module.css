@@ -128,7 +128,8 @@
 .loginBtn {
   background-color: #16a34a;
   color: white;
-  padding: 5px 5px;
+  padding: 8px 16px;
+  margin-left: 12px;
   border-radius: 8px;
   font-size: 14px;
   font-weight: 500;
