@@ -40,7 +40,9 @@
     background-color: #d97706;
 }
 
-
+.infoText {
+    text-align: left;
+}
 .infoSection {
     background-color: #f8fafc;
     padding: 40px 20px;
