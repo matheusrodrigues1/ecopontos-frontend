@@ -341,7 +341,7 @@ const MapPage = () => {
 
             <section className={styles.infoSection}>
                 <h2>Como funcionam os Ecopontos?</h2>
-                <p>
+                <p className={styles.infoText}>
                     Os Ecopontos são locais criados para receber materiais recicláveis como vidro, papel, plástico e metal. 
                     Eles ajudam a reduzir o lixo nas ruas e contribuem para a preservação do meio ambiente. 
                     Basta separar corretamente os resíduos e levá-los ao Ecoponto mais próximo.
