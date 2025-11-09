@@ -1,49 +1,93 @@
-.contato {
-    background-color: white;
-    padding: 24px;
-    border-radius: 12px;
+.pageWrapper {
+    background-color: #f9fafb;
+    min-height: 100vh;
+    padding: 40px 20px;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+}
+
+.container {
     max-width: 800px;
-    margin: 32px auto;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-    color: #1f2937;
-}
-
-.contatoTitulo {
-    font-size: 36px;
-    font-weight: 700;
-    margin-bottom: 16px;
-    text-align: center;
-    color: #093A3E;
-}
-
-.contatoTexto {
-    font-size: 18px;
-    line-height: 1.8;
-    margin-bottom: 24px;
-    text-align: justify;
-}
-
-.contatoFormulario input,
-.contatoFormulario textarea {
     width: 100%;
-    padding: 12px;
+    margin: 0 auto;
+}
+
+.header {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.mainTitle {
+    font-size: 2.5rem;
+    font-weight: 800;
+    color: #093A3E;
     margin-bottom: 16px;
-    border-radius: 8px;
-    border: 1px solid #ccc;
-    font-size: 16px;
+    letter-spacing: -0.02em;
 }
 
-.contatoFormulario button {
-    background-color: #093A3E;
-    color: white;
-    padding: 12px 24px;
-    border-radius: 8px;
-    font-size: 16px;
-    font-weight: bold;
-    cursor: pointer;
-    transition: background-color 0.3s;
+.subTitle {
+    font-size: 1.125rem;
+    color: #4b5563;
+    max-width: 600px;
+    margin: 0 auto;
+    line-height: 1.6;
 }
 
-.contatoFormulario button:hover {
-    background-color: #0a4a4f;
+.contentGrid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 24px;
+    justify-content: center;
+}
+
+.infoCard {
+    background-color: white;
+    padding: 28px;
+    border-radius: 16px;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
+    border: 1px solid #e5e7eb;
+}
+
+.infoCardTitle {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #093A3E;
+    margin-bottom: 16px;
+}
+
+.infoText {
+    font-size: 1rem;
+    color: #6b7280;
+    margin-bottom: 16px;
+    line-height: 1.6;
+}
+
+.contactList {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.contactList li {
+    font-size: 1.1rem;
+    color: #374151;
+    display: flex;
+    align-items: center; 
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.contactList li strong {
+    color: #093A3E;
+    font-weight: 600;
+}
+
+@media (min-width: 600px) {
+    .contentGrid {
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    }
 }
