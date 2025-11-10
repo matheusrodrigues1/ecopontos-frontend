@@ -1,50 +1,54 @@
 import React from "react";
 import trashIcon from "@/../public/lixeira.png";
 import Image from "next/image";
+import styles from "./Delete.module.css";
 
-const Editar = () => {
+const Deletar = () => {
   return (
-    <div className="flex flex-col items-center w-screen h-screen gap-10 bg-white">
-      <span className="font-bold text-2xl text-black !mt-10">
+    <div className={styles.container}>
+      <span className={styles.title}>
         Excluir Ecopontos
       </span>
-      <div className="flex flex-col items-center justify-center gap-2">
-        <span className="font-bold bg-[#093A3E] w-[381px] rounded-lg flex !pl-2 !pr-2 justify-between items-center h-[53px] text-xl text-white">
+      <div className={styles.listContainer}>
+        {/* Bloco de Ecoponto 1 */}
+        <span className={styles.ecopointItem}>
           Ecopontos Nome 1
           <Image
             src={trashIcon}
             alt="Lixeira"
             width={20}
             height={20}
-            className="cursor-pointer"
+            className={styles.trashIcon}
           />
         </span>
-        <span className="font-bold bg-[#093A3E] w-[381px] rounded-lg flex !pl-2 !pr-2 justify-between items-center h-[53px] text-xl text-white">
+        {/* Bloco de Ecoponto 2 */}
+        <span className={styles.ecopointItem}>
           Ecopontos Nome 1
           <Image
             src={trashIcon}
             alt="Lixeira"
             width={20}
             height={20}
-            className="cursor-pointer"
+            className={styles.trashIcon}
           />
         </span>
-        <span className="font-bold bg-[#093A3E] w-[381px] rounded-lg flex !pl-2 !pr-2 justify-between items-center h-[53px] text-xl text-white">
+        {/* Bloco de Ecoponto 3 */}
+        <span className={styles.ecopointItem}>
           Ecopontos Nome 1
           <Image
             src={trashIcon}
             alt="Lixeira"
             width={20}
             height={20}
-            className="cursor-pointer"
+            className={styles.trashIcon}
           />
         </span>
       </div>
-      <button className="!bg-[#093A3E] w-[223px] h-[53px] !text-white !rounded-lg">
+      <button className={styles.concludeButton}>
         Concluir
       </button>
     </div>
   );
 };
 
-export default Editar;
+export default Deletar;

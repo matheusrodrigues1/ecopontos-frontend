@@ -1,0 +1,59 @@
+/* Estilos para o div principal */
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100vw;
+  height: 100vh; 
+  gap: 2.5rem;
+  background-color: white; 
+}
+
+/* Estilos para o título */
+.title {
+  font-weight: 700; 
+  font-size: 1.5rem; 
+  color: black; 
+  margin-top: 2.5rem !important;
+}
+
+/* Estilos para o div que contém a lista */
+.listContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+}
+
+/* Estilos para cada item da lista (Ecoponto) */
+.ecopointItem {
+  font-weight: 700; 
+  background-color: #093a3e; 
+  width: 381px; 
+  border-radius: 0.5rem; 
+  display: flex; 
+  padding-left: 0.5rem !important;
+  padding-right: 0.5rem !important;
+  justify-content: space-between;
+  align-items: center;
+  height: 53px; 
+  font-size: 1.25rem; 
+  color: white; 
+}
+
+/* Estilos para o ícone de lixeira */
+.trashIcon {
+  cursor: pointer;
+}
+
+/* Estilos para o botão "Concluir" */
+.concludeButton {
+  background-color: #093a3e !important; 
+  width: 223px; 
+  height: 53px; 
+  color: white !important; 
+  border-radius: 0.5rem !important;
+  border: none; 
+  cursor: pointer;
+}

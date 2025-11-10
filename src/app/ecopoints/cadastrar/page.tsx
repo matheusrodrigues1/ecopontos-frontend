@@ -7,6 +7,8 @@ import { cadastrar } from "./cadastrar";
 import { useToastContext } from "@/contexts/ToastContext";
 
 import { EcoPoint } from "@/app/types/ecopoints/ecopoints";
+// Importa o módulo CSS
+import styles from "./Cadastrar.module.css";
 
 const Cadastrar = () => {
   const router = useRouter();
@@ -85,39 +87,32 @@ const Cadastrar = () => {
 
   return (
     <>
-      <div className="flex flex-col items-center w-screen h-screen gap-10 bg-white">
-        <div className="flex items-center justify-between w-full" style={{ paddingLeft: '10px', paddingRight: '16px', marginTop: '10px' }}>
+      {/* Container principal (Substitui as classes Tailwind) */}
+      <div className={styles.container}>
+        {/* Header Container (Substitui as classes Tailwind) */}
+        <div className={styles.headerContainer}>
           <button
             onClick={() => router.back()}
-            className="transition-colors"
-            style={{
-              backgroundColor: '#093A3E',
-              color: 'white',
-              padding: '8px 8px',
-              borderRadius: '6px',
-              fontSize: '14px',
-              fontWeight: '500',
-              border: 'none',
-              cursor: 'pointer'
-            }}
-            onMouseEnter={(e) => {
-              e.currentTarget.style.backgroundColor = '#0c4a4f';
-            }}
-            onMouseLeave={(e) => {
-              e.currentTarget.style.backgroundColor = '#093A3E';
-            }}
+            className={styles.backButton}
           >
             ← Voltar
           </button>
-          <span className="font-bold text-2xl text-black">
+          {/* Título (Substitui as classes Tailwind) */}
+          <span className={styles.headerTitle}>
             Cadastrar informações
           </span>
+          {/* Div vazia para alinhar o título ao centro */}
           <div style={{ width: '72px' }}></div>
         </div>
-        <div className="flex flex-col items-center justify-center mb-10">
-          <form onSubmit={handleSubmit} className="flex flex-col gap-2 w-[340px]">
+        
+        {/* Wrapper do Formulário (Substitui as classes Tailwind) */}
+        <div className={styles.formWrapper}>
+          {/* Formulário (Substitui as classes Tailwind) */}
+          <form onSubmit={handleSubmit} className={styles.form}>
+            
+            {/* Título */}
             <div>
-              <label className="block text-[15px] text-[#093A3E] font-bold mb-1">
+              <label className={styles.label}>
                 Título
               </label>
               <input
@@ -126,12 +121,14 @@ const Cadastrar = () => {
                 value={formData.title}
                 onChange={handleInputChange}
                 placeholder="Ecoponto Nome 1"
-                className="w-full h-[40px] border-2 !bg-[#093A3E] !text-white !placeholder:text-[20px] border-[#093A3E] p-3 !rounded-lg !pl-3"
+                className={styles.inputField}
                 required
               />
             </div>
+            
+            {/* Horário de funcionamento */}
             <div>
-              <label className="block text-[15px] text-[#093A3E] font-bold mb-1">
+              <label className={styles.label}>
                 Horário de funcionamento
               </label>
               <input
@@ -140,12 +137,14 @@ const Cadastrar = () => {
                 value={formData.opening_hours}
                 onChange={handleInputChange}
                 placeholder="08:00 às 17:00"
-                className="w-full h-[40px] border-2 !bg-[#093A3E] !text-white !placeholder:text-[20px] border-[#093A3E] p-3 !rounded-lg !pl-3"
+                className={styles.inputField}
                 required
               />
             </div>
+            
+            {/* Intervalo */}
             <div>
-              <label className="block text-[15px] text-[#093A3E] font-bold mb-1">
+              <label className={styles.label}>
                 Intervalo
               </label>
               <input
@@ -154,12 +153,14 @@ const Cadastrar = () => {
                 value={formData.interval}
                 onChange={handleInputChange}
                 placeholder="Diário"
-                className="w-full h-[40px] border-2 !bg-[#093A3E] !text-white !placeholder:text-[20px] border-[#093A3E] p-3 !rounded-lg !pl-3"
+                className={styles.inputField}
                 required
               />
             </div>
+            
+            {/* CNPJ */}
             <div>
-              <label className="block text-[15px] text-[#093A3E] font-bold mb-1">
+              <label className={styles.label}>
                 CNPJ
               </label>
               <input
@@ -168,12 +169,14 @@ const Cadastrar = () => {
                 value={formData.cnpj}
                 onChange={handleInputChange}
                 placeholder="12.345.678/0001-91"
-                className="w-full h-[40px] border-2 !bg-[#093A3E] !text-white !placeholder:text-[20px] border-[#093A3E] p-3 !rounded-lg !pl-3"
+                className={styles.inputField}
                 required
               />
             </div>
+            
+            {/* Materiais aceitos */}
             <div>
-              <label className="block text-[15px] text-[#093A3E] font-bold mb-1">
+              <label className={styles.label}>
                 Materiais aceitos
               </label>
               <input
@@ -182,12 +185,14 @@ const Cadastrar = () => {
                 value={formData.accepted_materials}
                 onChange={handleInputChange}
                 placeholder="papel, plástico, vidro, metal"
-                className="w-full h-[40px] border-2 !bg-[#093A3E] !text-white !placeholder:text-[20px] border-[#093A3E] p-3 !rounded-lg !pl-3"
+                className={styles.inputField}
                 required
               />
             </div>
+            
+            {/* Endereço */}
             <div>
-              <label className="block text-[15px] text-[#093A3E] font-bold mb-1">
+              <label className={styles.label}>
                 Endereço
               </label>
               <input
@@ -196,12 +201,14 @@ const Cadastrar = () => {
                 value={formData.address}
                 onChange={handleInputChange}
                 placeholder="Rua Fulano de Tal, 14, Bairro Duro"
-                className="w-full h-[40px] border-2 !bg-[#093A3E] !text-white !placeholder:text-[20px] border-[#093A3E] p-3 !rounded-lg !pl-3"
+                className={styles.inputField}
                 required
               />
             </div>
+            
+            {/* Coordenadas */}
             <div>
-              <label className="block text-[15px] text-[#093A3E] font-bold mb-1">
+              <label className={styles.label}>
                 Coordenadas
               </label>
               <input
@@ -210,17 +217,20 @@ const Cadastrar = () => {
                 value={formData.coordinates}
                 onChange={handleInputChange}
                 placeholder="-9.7518,-36.6612"
-                className="w-full h-[40px] border-2 !bg-[#093A3E] !text-white !placeholder:text-[20px] border-[#093A3E] p-3 !rounded-lg !pl-3"
+                className={styles.inputField}
                 required
               />
             </div>
+            
+            {/* Botão de Cadastro */}
             <button
               type="submit"
               disabled={isLoading}
-              className="mt-9 self-center h-[40px] w-[200px] !bg-[#093A3E] hover:!bg-[#0c4a4f] !text-white !rounded-lg disabled:opacity-50 transition-colors cursor-pointer"
+              className={styles.submitButton}
             >
               {isLoading ? "Cadastrando..." : "Cadastrar"}
             </button>
+            
           </form>
         </div>
       </div>

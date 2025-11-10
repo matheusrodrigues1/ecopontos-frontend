@@ -8,6 +8,7 @@ import ProtectedRoute from "../../components/ProtectedRoute";
 import { getEcopontos } from "../getEcopoints";
 import { handleDeleteEcoponto } from "../excluir/deleteEcoponto";
 import { EcoPointList } from "@/app/types/ecopoints/ecopoints";
+import "./Listar.module.css"
 
 const Listar = () => {
     const [ecopoints, setEcopoints] = useState<EcoPointList[]>([]);

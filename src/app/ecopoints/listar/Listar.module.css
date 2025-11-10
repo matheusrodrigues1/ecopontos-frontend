@@ -1,0 +1,243 @@
+
+/* Estilos para o estado de Carregamento */
+.loadingContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100vw;
+    height: 100vh;
+    gap: 40px; 
+    background-color: white; 
+    justify-content: center;
+}
+
+.loadingText {
+    font-weight: bold;
+    font-size: 24px;
+    color: black;
+}
+
+/* Estilos para o Container Principal da Lista */
+.listContainer {
+    display: flex;
+    flex-direction: column;
+    width: 100vw;
+    min-height: 100vh;
+    background-color: white; 
+}
+
+/* Estilos para o Cabeçalho (Botões Voltar, Título, Novo Ecoponto) */
+.header {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    padding: 10px 16px;
+    margin-top: 10px;
+    margin-bottom: 20px;
+}
+
+.titleWrapper {
+    flex: 1; 
+    display: flex;
+    justify-content: center; 
+}
+
+.title {
+    font-weight: bold;
+    font-size: 24px; 
+    color: black; 
+}
+
+/* Estilos Comuns para os Botões de Navegação (Voltar e Novo) */
+.backButton, .newButton {
+    transition: background-color 0.2s; 
+    background-color: #093A3E; 
+    color: white; 
+    padding: 8px 16px;
+    border-radius: 6px;
+    font-size: 14px;
+    font-weight: 500;
+    border: none;
+    cursor: pointer;
+}
+
+.backButton:hover, .newButton:hover {
+    background-color: #0c4a4f;
+}
+
+/* Área de Conteúdo (Lista ou Mensagem de Vazio) */
+.contentArea {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    padding: 0 24px;
+}
+
+/* Estado Vazio (Nenhum Ecoponto) */
+.emptyState {
+    text-align: center;
+    padding: 64px 0;
+}
+
+.emptyText {
+    color: #6b7280;
+    margin-bottom: 24px; 
+    font-size: 18px;
+}
+
+.registerButton {
+    padding: 16px 32px;
+    background-color: #093A3E; 
+    color: white;
+    border-radius: 8px;
+    transition: background-color 0.2s;
+    font-weight: 500;
+    font-size: 18px;
+    cursor: pointer;
+    border: none;
+}
+
+.registerButton:hover {
+    background-color: #0c4a4f;
+}
+
+/* Lista de Ecopontos (Container) */
+.ecopointsList {
+    width: 100%;
+    max-width: 1152px;
+}
+
+/* Card Individual de Ecoponto */
+.ecopointCard {
+    border: 2px solid #093A3E; 
+    border-radius: 8px;
+    padding: 24px;
+    background-color: white;
+    box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1);
+    margin-bottom: 24px;
+}
+
+.cardContent {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+}
+
+.infoArea {
+    flex: 1;
+}
+
+.ecopointTitle {
+    font-size: 20px;
+    font-weight: bold;
+    color: black;
+    margin-bottom: 16px;
+    border: none;
+    border-bottom: none;
+}
+
+.detailsGrid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 32px 12px;
+    font-size: 14px;
+}
+
+.detailLabel {
+    font-weight: bold;
+    color: black;
+}
+
+.detailValue {
+    color: #374151;
+    font-weight: normal;
+}
+
+.fullRow {
+    grid-column: span 2;
+}
+
+/* Área de Ações (Botões Editar e Excluir) */
+.actionButtons {
+    display: flex;
+    gap: 12px;
+    margin-left: 24px;
+    flex-direction: column; 
+    align-items: center;
+}
+
+/* Estilos Comuns para Botões de Ação */
+.editButton, .deleteButton {
+    padding: 8px 16px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    transition: background-color 0.2s;
+    width: 100%;
+    justify-content: center;
+}
+
+/* Botão Editar */
+.editButton {
+    border: 1px solid #fb923c; 
+    color: #ea580c; 
+    background-color: white; 
+}
+
+.editButton:hover {
+    background-color: #fef3f2; 
+}
+
+/* Botão Excluir */
+.deleteButton {
+    background-color: #dc2626; 
+    color: white; 
+    border: none;
+}
+
+.deleteButton:hover {
+    background-color: #b91c1c; 
+}
+
+/* Media Query para empilhar itens em telas menores */
+@media (max-width: 768px) {
+    .header {
+        flex-wrap: wrap;
+        gap: 10px;
+    }
+
+    .titleWrapper {
+        flex-basis: 100%;
+        order: -1;
+        margin-bottom: 10px;
+    }
+
+    .detailsGrid {
+        grid-template-columns: 1fr;
+        gap: 16px 0;
+    }
+
+    .fullRow {
+        grid-column: span 1;
+    }
+
+    .cardContent {
+        flex-direction: column;
+    }
+
+    .actionButtons {
+        flex-direction: row;
+        margin-left: 0;
+        margin-top: 20px;
+        width: 100%;
+        justify-content: space-between;
+    }
+    
+    .editButton, .deleteButton {
+        flex: 1;
+    }
+}
