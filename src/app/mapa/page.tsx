@@ -131,6 +131,20 @@ const MapPage = () => {
   }, [isMounted, initializeAll]);
 
   useEffect(() => {
+    const handleClickOutside = (e: MouseEvent) => {
+      const target = e.target as HTMLElement;
+      if (
+        !target.closest(`.${styles.menuDropdown}`) &&
+        !target.closest(`.${styles.menuToggle}`)
+      ) {
+        setMenuAberto(false);
+      }
+    };
+    document.addEventListener("click", handleClickOutside);
+    return () => document.removeEventListener("click", handleClickOutside);
+  }, []);
+
+  useEffect(() => {
     if (!map || !infoWindow || isLoading) return;
 
     markersRef.current.forEach((marker) => marker.setMap(null));
@@ -270,17 +284,12 @@ const MapPage = () => {
               }}
             />
           </div>
-
-          {/* Título */}
           <div className="flex-1 flex justify-center">
             <span className="text-xl font-medium text-center whitespace-nowrap">
               Mapa de Ecopontos
             </span>
           </div>
-
-          {/* Área da direita */}
           <div className="flex-shrink-0 flex items-center gap-4">
-            {/* Quantidade de ecopontos */}
             {!isLoading && !error && (
               <span
                 className="text-xs px-4 py-2 rounded-full"
@@ -295,7 +304,6 @@ const MapPage = () => {
               </span>
             )}
 
-            {/* Usuário logado */}
             <div className="flex items-center gap-3">
               {user ? (
                 <>
@@ -333,7 +341,6 @@ const MapPage = () => {
                 </button>
               )}
 
-              {/* Menu sanduíche no final */}
               <div className="relative flex items-center">
                 <button
                   className={styles.menuToggle}
