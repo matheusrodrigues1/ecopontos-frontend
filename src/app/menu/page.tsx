@@ -44,11 +44,19 @@ const Menu = () => {
           >
             Listar Ecopontos
           </button>
+          <button
+            className={`${styles.button} ${styles.buttonEcopoints}`}
+            onClick={() => router.push("/ecopoints/solicitar")}
+          >
+            Solicitar Coleta
+          </button>
 
           {user?.role === "admin" && (
             <>
               <div className={styles.divider}></div>
-              <p className="text-gray-600 font-medium mb-2">Área Administrativa</p>
+              <p className="text-gray-600 font-medium mb-2">
+                Área Administrativa
+              </p>
 
               <button
                 className={`${styles.button} ${styles.buttonAdmin}`}
