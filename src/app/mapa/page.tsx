@@ -511,6 +511,49 @@ const MapPage = () => {
           </div>
         </div>
       </section>
+      <section className={styles.faqSection}>
+  <h2>Perguntas Frequentes</h2>
+
+  <div className={styles.faqItem}>
+    <h3>📍 Onde posso encontrar o Ecoponto mais próximo?</h3>
+    <p>
+      Você pode visualizar todos os Ecopontos disponíveis diretamente no mapa acima. 
+      Use o filtro de materiais para encontrar o que mais se adequa às suas necessidades.
+    </p>
+  </div>
+
+  <div className={styles.faqItem}>
+    <h3>♻️ Que tipos de materiais posso levar?</h3>
+    <p>
+      Os Ecopontos aceitam materiais recicláveis como papel, vidro, metal e plástico. 
+      Cada unidade pode ter variações, então verifique as informações no mapa.
+    </p>
+  </div>
+
+  <div className={styles.faqItem}>
+    <h3>🕒 Qual é o horário de funcionamento?</h3>
+    <p>
+      Os horários variam conforme o Ecoponto. Clique no marcador no mapa para ver os detalhes.
+    </p>
+  </div>
+
+  <div className={styles.faqItem}>
+    <h3>🚫 O que não posso descartar?</h3>
+    <p>
+      Não é permitido levar resíduos orgânicos, entulhos, eletrônicos quebrados, 
+      pilhas ou lâmpadas. Procure o destino correto para esses materiais.
+    </p>
+  </div>
+
+  <div className={styles.faqItem}>
+    <h3>👨‍👩‍👧‍👦 Posso levar meus filhos aos Ecopontos?</h3>
+    <p>
+      Sim! Os Ecopontos são locais seguros e educativos. É uma ótima oportunidade 
+      para ensinar às crianças sobre sustentabilidade e reciclagem.
+    </p>
+  </div>
+</section>
+
       <section className={styles.callToAction}>
         <h2>Participe você também!</h2>
         <p>
