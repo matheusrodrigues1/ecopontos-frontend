@@ -104,9 +104,19 @@
 }
 
 .submitButton {
-  margin-top: 1.5rem;
+   margin-top: 1rem;
   align-self: center;
   cursor: pointer;
+  background-color: #093a3e;
+  color: white;
+  padding: 8px 16px;
+  border-radius: 8px;
+  font-weight: 500;
+  border: none;
+}
+
+.submitButton:hover {
+  background-color: #0c4a4f;
 }
 
 .loadingButton {
@@ -118,4 +128,36 @@
   background-color: gray;
   border-radius: 0.5rem;
   color: white;
+}
+
+.registerButton{
+  margin-top: 1rem;
+  align-self: center;
+  cursor: pointer;
+  background-color: #093a3e;
+  color: white;
+  padding: 8px 16px;
+  border-radius: 8px;
+  font-weight: 500;
+  border: none;
+}
+
+.registerButton:hover {
+  background-color: #0c4a4f;
+}
+
+/* Row for action buttons to display side-by-side */
+.buttonRow {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+/* When buttons are inside .buttonRow, remove their top margin so they sit inline */
+.buttonRow .submitButton,
+.buttonRow .registerButton {
+  margin-top: 0;
+  align-self: auto;
 }
