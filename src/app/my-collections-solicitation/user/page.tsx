@@ -8,6 +8,7 @@ import { useAuth } from "@/app/hooks/useAuth";
 import Navbar from "@/app/navbar/navbar";
 
 import styles from "./style.module.css";
+import { useRouter } from "next/navigation";
 
 type Collection = {
     _id: string;
@@ -22,6 +23,7 @@ type Collection = {
 };
 
 export default function UserCollectionsPage() {
+    const router = useRouter();
     const { showToast } = useToastContext();
 
     const { user, isLoading } = useAuth();
@@ -74,6 +76,9 @@ export default function UserCollectionsPage() {
         <>
             <Navbar />
             <div style={{ padding: 20 }} className={styles['my-solicitations']}>
+                <button className={styles.backButton} onClick={() => router.back()}>
+                    ← Voltar
+                </button>
                 <h2>Minhas solicitações</h2>
 
                 {!userId && (
