@@ -2,71 +2,20 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100vh;
-  background-color: #ffffff;
+  min-height: 100vh;
+  background-color: #000;
   padding: 16px;
 }
 
 .card {
-  background-color: #093A3E;
+  background-color: #093a3e;
   padding: 32px 24px;
   border-radius: 12px;
-  box-shadow: 0 8px 16px rgba(0,0,0,0.1);
   width: 100%;
-  max-width: 400px;
-}
-
-.title {
-  font-size: 1.8rem;
-  font-weight: 700;
-  color: #ffffff;
-  text-align: center;
-  margin-bottom: 24px;
-}
-
-.form {
+  max-width: 420px;
   display: flex;
   flex-direction: column;
   gap: 16px;
-  color: #ffffff; /* cor do texto */
-  background-color: transparent;
-}
-
-.form label {
-  font-weight: 500;
-  margin-bottom: 4px;
-  color: #ffffff;
-}
-
-.form input {
-  padding: 10px 12px;
-  border: 1px solid #cbd5e1;
-  border-radius: 8px;
-  font-size: 1rem;
-  outline: none;
-  transition: border-color 0.2s;
-}
-
-.form input:focus {
-  border-color: #0ea5e9;
-}
-
-.form button {
-  padding: 12px;
-  border-radius: 8px;
-  font-weight: 600;
-  cursor: pointer;
-  border: none;
-  transition: background-color 0.2s;
-}
-
-.form button[type="submit"] {
-  background-color: #0c4a4f;
-  color: white;
-}
-
-.form button[type="submit"]:hover {
-  background-color: #07555c;
 }
 
 .backButton {
@@ -83,6 +32,59 @@
 
 .backButton:hover {
   background-color: #07555c;
+}
+
+.title {
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: #fff;
+  text-align: center;
+  margin-bottom: 24px;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.form label {
+  font-weight: 600;
+  color: #fff;
+}
+
+.form input {
+  padding: 10px 12px;
+  border: 1px solid #0c4a4f;
+  border-radius: 8px;
+  font-size: 1rem;
+  outline: none;
+  background-color: #0c4a4f;
+  color: #fff;
+}
+
+.form input::placeholder {
+  color: #cbd5e1;
+}
+
+.form button {
+  background-color: #0c4a4f;
+  color: #fff;
+  padding: 12px;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+  border: none;
+  transition: background-color 0.2s;
+}
+
+.form button:hover {
+  background-color: #07555c;
+}
+
+.form button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
 }
 
 .textInfo {

@@ -3,9 +3,8 @@
   justify-content: center;
   align-items: flex-start;
   min-height: 100vh;
-  background: #093A3E;
-  /* tom pedido pelo usuário */
-  padding: 40px 24px;
+  background-color: #ffff;
+  padding: 16px;
 }
 
 .card {
