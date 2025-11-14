@@ -64,7 +64,7 @@ const Menu = () => {
 
               <button
                 className={`${styles.button} ${styles.buttonEcopoints}`}
-                onClick={() => router.push("/meus-pedidos")}
+                onClick={() => router.push("/my-collections-solicitation/user")}
               >
                 Minhas solicitações
               </button>
