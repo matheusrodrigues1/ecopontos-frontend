@@ -1,111 +1,150 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
-import { solicitarColeta } from "./solicitar";
+import { solicitarColeta, SolicitarPayload } from "./solicitar";
 import { useToastContext } from "@/contexts/ToastContext";
 import styles from "./style.module.css";
+import { getEcopontos } from "../getEcopoints";
+import ProtectedRoute from "../../components/ProtectedRoute";
+import Navbar from "@/app/navbar/navbar";
 
 const MATERIAIS = ["Papel", "Plástico", "Vidro", "Metal", "Eletrônicos", "Orgânico", "Outros"];
 
-const SolicitarColeta = () => {
+const SolicitarColetaPage = () => {
   const router = useRouter();
   const { showToast } = useToastContext();
 
-  const [formData, setFormData] = useState({
-    material: "",
-    quantidade: 1,
-    endereco: "",
-    observacoes: "",
-  });
+  const [ecopoints, setEcopoints] = useState<any[]>([]);
+  const [loadingList, setLoadingList] = useState(true);
 
-  const [isLoading, setIsLoading] = useState(false);
+  const [modalOpen, setModalOpen] = useState(false);
+  const [selected, setSelected] = useState<any | null>(null);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
+  const [form, setForm] = useState({ material: "", quantity: 1, address: "", description: "" });
+
+  useEffect(() => {
+    const fetch = async () => {
+      try {
+        const res = await getEcopontos();
+        setEcopoints(res || []);
+      } catch (err) {
+        showToast("Erro ao carregar empresas cadastradas.", "error");
+      } finally {
+        setLoadingList(false);
+      }
+    };
+    fetch();
+  }, [showToast]);
+
+  const openModalFor = (ecopoint: any) => {
+    setSelected(ecopoint);
+    // start address empty - user should provide where collection must occur
+    setForm({ material: "", quantity: 50, address: "", description: "" });
+    setModalOpen(true);
+  };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
     const { name, value } = e.target;
-    setFormData(prev => ({
-      ...prev,
-      [name]: name === "quantidade" ? Number(value) : value
-    }));
+    setForm(prev => ({ ...prev, [name]: name === 'quantity' ? Number(value) : value }));
   };
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setIsLoading(true);
+  const handleSubmit = async (e?: React.FormEvent) => {
+    e?.preventDefault();
+    if (!selected) return;
+    // Client-side validation: address must be provided
+    if (!form.address || form.address.toString().trim() === "") {
+      showToast("Preencha o endereço da coleta.", "error");
+      return;
+    }
+
+    setIsSubmitting(true);
+
+    const payload: SolicitarPayload = {
+      ecopointId: selected.id || selected._id || selected.id,
+      quantity: form.quantity,
+      material: form.material,
+      address: form.address,
+      description: form.description,
+    };
 
     try {
-      await solicitarColeta(formData);
-      showToast("Solicitação de coleta enviada com sucesso!", "success");
-      setFormData({ material: "", quantidade: 1, endereco: "", observacoes: "" });
-    } catch (error) {
-      console.error("Erro ao solicitar coleta:", error);
-      showToast("Erro ao enviar solicitação. Tente novamente.", "error");
+      await solicitarColeta(payload);
+      showToast("Solicitação enviada com sucesso!", "success");
+      setModalOpen(false);
+    } catch (err) {
+      showToast("Erro ao solicitar coleta, tente novamente.", "error");
     } finally {
-      setIsLoading(false);
+      setIsSubmitting(false);
     }
   };
 
   return (
-    <div className={styles.pageContainer}>
-      <div className={styles.card}>
-        <button className={styles.backButton} onClick={() => router.back()}>
-          ← Voltar
-        </button>
+    <>
+      <ProtectedRoute>
+        <Navbar />
+        <div className={styles.pageContainer}>
+          <div className={styles.card}>
+            <button className={styles.backButton} onClick={() => router.back()}>← Voltar</button>
+            <h2 className={styles.title}>Solicitar Coleta</h2>
 
-        <h2 className={styles.title}>Solicitar Coleta</h2>
+            {loadingList ? (
+              <div>Carregando empresas...</div>
+            ) : (
+              <div className={styles.listContainer}>
+                {ecopoints.length === 0 ? (
+                  <div>Nenhuma empresa encontrada.</div>
+                ) : (
+                  ecopoints.map(ep => (
+                    <div key={ep.id || ep._id} className={styles.epCard}>
+                      <div>
+                        <div className={styles.epTitle}>{ep.title || ep.name}</div>
+                        <div><strong>CNPJ:</strong> {ep.cnpj || ep.cpf}</div>
+                        <div><strong>Endereço:</strong> {ep.address}</div>
+                      </div>
+                      <div>
+                        <button className={styles.requestButton} onClick={() => openModalFor(ep)}>Solicitar Coleta</button>
+                      </div>
+                    </div>
+                  ))
+                )}
+              </div>
+            )}
 
-        <form onSubmit={handleSubmit} className={styles.form}>
-          <label>Material</label>
-          <select
-            name="material"
-            value={formData.material}
-            onChange={handleChange}
-            required
-            className={styles.select}
-          >
-            <option value="">Selecione um material</option>
-            {MATERIAIS.map(mat => (
-              <option key={mat} value={mat}>{mat}</option>
-            ))}
-          </select>
+            {modalOpen && selected && (
+              <div className={styles.modalOverlay}>
+                <div className={styles.modal}>
+                  <h3>Solicitar coleta para: {selected.title || selected.name}</h3>
+                  <form onSubmit={handleSubmit} className={styles.form}>
+                    <label>Material</label>
+                    <select name="material" value={form.material} onChange={handleChange} required>
+                      <option value="">Selecione um material</option>
+                      {MATERIAIS.map(m => <option key={m} value={m}>{m}</option>)}
+                    </select>
 
-          <label>Quantidade (em kg)</label>
-          <input
-            type="number"
-            name="quantidade"
-            value={formData.quantidade}
-            min={1}
-            onChange={handleChange}
-            placeholder="Ex: 5"
-            required
-          />
+                    <label>Quantidade (kg)</label>
+                    <input name="quantity" type="number" min={1} value={form.quantity} onChange={handleChange} required />
 
-          <label>Endereço da coleta</label>
-          <input
-            type="text"
-            name="endereco"
-            value={formData.endereco}
-            onChange={handleChange}
-            placeholder="Rua das Flores, 123, Centro"
-            required
-          />
+                    <label>Endereço</label>
+                    <input name="address" type="text" value={form.address} onChange={handleChange} required />
 
-          <label>Observações</label>
-          <textarea
-            name="observacoes"
-            value={formData.observacoes}
-            onChange={handleChange}
-            placeholder="Ex: portão azul, avisar ao chegar..."
-            rows={3}
-          />
+                    <label>Descrição</label>
+                    <textarea name="description" value={form.description} onChange={handleChange} rows={3} />
 
-          <button type="submit" disabled={isLoading} className={styles.submitButton}>
-            {isLoading ? "Enviando..." : "Enviar Solicitação"}
-          </button>
-        </form>
-      </div>
-    </div>
+                    <div className={styles.modalActions}>
+                      <button type="button" onClick={() => setModalOpen(false)} className={styles.cancelButton}>Cancelar</button>
+                      <button type="submit" disabled={isSubmitting} className={styles.submitButton}>{isSubmitting ? 'Enviando...' : 'Solicitar Coleta'}</button>
+                    </div>
+                  </form>
+                </div>
+              </div>
+            )}
+          </div>
+        </div>
+      </ProtectedRoute>
+    </>
   );
 };
 
-export default SolicitarColeta;
+export default SolicitarColetaPage;
