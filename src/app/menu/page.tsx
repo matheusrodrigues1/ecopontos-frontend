@@ -99,7 +99,7 @@ const Menu = () => {
               </button>
               <button
                 className={`${styles.button} ${styles.buttonEcopoints}`}
-                onClick={() => router.push("/ecopoints/solicitacoes")}
+                onClick={() => router.push("/my-collections-solicitation/enterprise")}
               >
                 Solicitações de coletas
               </button>

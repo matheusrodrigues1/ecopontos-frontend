@@ -41,7 +41,7 @@ const SolicitarColetaPage = () => {
   const openModalFor = (ecopoint: any) => {
     setSelected(ecopoint);
     // start address empty - user should provide where collection must occur
-    setForm({ material: "", quantity: 50, address: "", description: "" });
+    setForm({ material: "", quantity: 1, address: "", description: "" });
     setModalOpen(true);
   };
 
@@ -53,9 +53,17 @@ const SolicitarColetaPage = () => {
   const handleSubmit = async (e?: React.FormEvent) => {
     e?.preventDefault();
     if (!selected) return;
-    // Client-side validation: address must be provided
+    // Client-side validation: required fields
+    if (!form.material || form.material.toString().trim() === "") {
+      showToast("Selecione o material.", "error");
+      return;
+    }
     if (!form.address || form.address.toString().trim() === "") {
       showToast("Preencha o endereço da coleta.", "error");
+      return;
+    }
+    if (!form.description || form.description.toString().trim() === "") {
+      showToast("Preencha a descrição da coleta.", "error");
       return;
     }
 
@@ -130,7 +138,7 @@ const SolicitarColetaPage = () => {
                     <input name="address" type="text" value={form.address} onChange={handleChange} required />
 
                     <label>Descrição</label>
-                    <textarea name="description" value={form.description} onChange={handleChange} rows={3} />
+                    <textarea name="description" value={form.description} onChange={handleChange} rows={3} required />
 
                     <div className={styles.modalActions}>
                       <button type="button" onClick={() => setModalOpen(false)} className={styles.cancelButton}>Cancelar</button>
