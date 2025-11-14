@@ -3,7 +3,6 @@ import Image from "next/image";
 import React, { useState, FormEvent } from "react";
 import { useRouter } from "next/navigation";
 import logo from "../../../public/login.png";
-import buttonImage from "../../../public/Group 1.png";
 import { useToastContext } from "../../contexts/ToastContext";
 import { responseLogin } from "./login";
 import styles from "./style.module.css";
@@ -81,13 +80,17 @@ const Login = () => {
               className={styles.input}
             />
           </div>
-          <button type="submit" className={styles.submitButton} disabled={isLoading}>
-            {isLoading ? (
-              <div className={styles.loadingButton}>Carregando...</div>
-            ) : (
-              <Image src={buttonImage} alt="Acessar" width={159} height={37} />
-            )}
-          </button>
+          <div className={styles.buttonRow}>
+            <button type="submit" className={styles.submitButton} disabled={isLoading}>
+              {isLoading ? (
+                <div className={styles.loadingButton}>Carregando...</div>
+              ) : (
+                <p>Acessar</p>
+              )}
+            </button>
+
+            <button className={styles.registerButton} onClick={() => router.push("/cadastro-usuario")}>Se cadastrar</button>
+          </div>
         </form>
       </div>
     </div>

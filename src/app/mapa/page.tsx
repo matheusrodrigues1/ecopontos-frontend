@@ -77,6 +77,7 @@ const MapPage = () => {
   };
 
   const initializeMap = async () => {
+    console.debug('initializeMap called', { mapRef: !!mapRef.current, hasGoogle: typeof window !== 'undefined' && typeof (window as any).google !== 'undefined' });
     if (!mapRef.current || !window.google) return;
 
     try {
@@ -111,7 +112,9 @@ const MapPage = () => {
   const initializeAll = useCallback(async () => {
     try {
       setIsLoading(true);
+      console.debug('Calling LoadGoogleMapsScript');
       await loadGoogleMapsScript();
+      console.debug('LoadGoogleMapsScript resolved', { hasGoogle: typeof window !== 'undefined' && typeof (window as any).google !== 'undefined' });
       await loadEcoPoints();
       await initializeMap();
     } catch (error) {
@@ -175,7 +178,7 @@ const MapPage = () => {
       });
 
       const contentString = `
-                <div style="max-width: 300px; font-family: Arial, sans-serif;">
+                <div style="max-width: 950px; font-family: Arial, sans-serif;">
                     <h3 style="color: #093A3E; margin: 0 0 12px 0; font-size: 18px; font-weight: bold;">${
                       ecoPoint.title
                     }</h3>
@@ -329,7 +332,7 @@ const MapPage = () => {
                 <>
                   <span className="text-sm whitespace-nowrap">
                     Olá, {user.name} (
-                    {user.role === "admin" ? "Admin" : "Usuário"})
+                    {user.role === "admin" ? "Admin" : user.role === "enterprise" ? "Empresa" : "Usuário"})
                   </span>
 
                   <button
@@ -462,46 +465,48 @@ const MapPage = () => {
       )}
 
       {!error && (
-        <div className="relative w-full max-w-4xl mx-auto my-4">
-          <div
-            ref={mapRef}
-            className="w-full h-[500px] md:h-[600px] rounded-lg shadow-md"
-            style={{ height: "60vh" }}
-          />
+        <div className="w-full mx-auto my-4 flex justify-center bg-white">
+          <div className="relative w-full bg-white rounded-lg overflow-hidden" style={{ maxWidth: 950, minWidth: 450 }}>
+            <div
+              ref={mapRef}
+              className="w-full rounded-lg shadow-md"
+              style={{ height: "60vh", background: "#ffffff", minWidth: 450 }}
+            />
 
-          {!isLoading && (
-            <div className="absolute top-4 left-4 z-10 p-4 bg-white rounded-lg shadow-xl max-w-xs w-full">
-              <label
-                htmlFor="material-filter"
-                className="block text-sm font-medium text-gray-900 mb-2"
-              >
-                🔎 <strong>Filtrar por material:</strong>
-              </label>
-              <select
-                id="material-filter"
-                value={selectedMaterial}
-                onChange={(e) => setSelectedMaterial(e.target.value)}
-                className="w-full p-3 border border-gray-300 rounded-lg shadow-sm cursor-pointer focus:ring-2 focus:ring-[#093A3E] focus:border-[#093A3E]"
-                style={{ fontSize: "16px", color: "black" }}
-              >
-                <option value="todos">Todos os Materiais</option>
-                {allMaterials.map((material) => (
-                  <option key={material} value={material}>
-                    {material}
-                  </option>
-                ))}
-              </select>
-            </div>
-          )}
+            {!isLoading && (
+              <div className="absolute top-4 left-4 z-10 p-4 bg-white rounded-lg shadow-xl max-w-xs w-full">
+                <label
+                  htmlFor="material-filter"
+                  className="block text-sm font-medium text-gray-900 mb-2"
+                >
+                  🔎 <strong>Filtrar por material:</strong>
+                </label>
+                <select
+                  id="material-filter"
+                  value={selectedMaterial}
+                  onChange={(e) => setSelectedMaterial(e.target.value)}
+                  className="w-full p-3 border border-gray-300 rounded-lg shadow-sm cursor-pointer focus:ring-2 focus:ring-[#093A3E] focus:border-[#093A3E]"
+                  style={{ fontSize: "16px", color: "black" }}
+                >
+                  <option value="todos">Todos os Materiais</option>
+                  {allMaterials.map((material) => (
+                    <option key={material} value={material}>
+                      {material}
+                    </option>
+                  ))}
+                </select>
+              </div>
+            )}
 
-          <style jsx global>{`
-            /* ... (Suas regras de estilo global continuam iguais) ... */
-            img[alt="Seta para voltar"] {
-              display: none !important;
-            }
+            <style jsx global>{`
+              /* ... (Suas regras de estilo global continuam iguais) ... */
+              img[alt="Seta para voltar"] {
+                display: none !important;
+              }
 
-            /* ... (resto do CSS global igual) ... */
-          `}</style>
+              /* ... (resto do CSS global igual) ... */
+            `}</style>
+          </div>
         </div>
       )}
 

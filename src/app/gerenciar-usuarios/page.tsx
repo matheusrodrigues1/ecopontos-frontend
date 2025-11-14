@@ -294,7 +294,7 @@ const GerenciarUsuarios = () => {
                   <div style={{ overflowX: "auto" }}>
                     <table className={styles.userTable}>
                       <thead className={styles.tableHeader}>
-                        <tr style={{ backgroundColor: "#000"}}>
+                        <tr style={{ backgroundColor: "#000" }}>
                           <th className={styles.tableCell}>Nome</th>
                           <th className={styles.tableCell}>Email</th>
                           <th className={styles.tableCell}>Tipo</th>

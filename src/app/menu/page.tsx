@@ -32,25 +32,6 @@ const Menu = () => {
         </div>
 
         <div className="flex flex-col items-center justify-center gap-2 mt-8">
-          <button
-            className={`${styles.button} ${styles.buttonEcopoints}`}
-            onClick={() => router.push("/ecopoints/cadastrar")}
-          >
-            Cadastrar Ecoponto
-          </button>
-          <button
-            className={`${styles.button} ${styles.buttonEcopoints}`}
-            onClick={() => router.push("/ecopoints/listar")}
-          >
-            Listar Ecopontos
-          </button>
-          <button
-            className={`${styles.button} ${styles.buttonEcopoints}`}
-            onClick={() => router.push("/ecopoints/solicitar")}
-          >
-            Solicitar Coleta
-          </button>
-
           {user?.role === "admin" && (
             <>
               <div className={styles.divider}></div>
@@ -70,6 +51,57 @@ const Menu = () => {
                 onClick={() => router.push("/cadastrar-empresa")}
               >
                 Cadastrar empresa
+              </button>
+            </>
+          )}
+
+          {user?.role === "user" && (
+            <>
+              <div className={styles.divider}></div>
+              <p className="text-gray-600 font-medium mb-2">
+                Área do Usuário
+              </p>
+
+              <button
+                className={`${styles.button} ${styles.buttonEcopoints}`}
+                onClick={() => router.push("/my-collections-solicitation/user")}
+              >
+                Minhas solicitações
+              </button>
+              <button
+                className={`${styles.button} ${styles.buttonEcopoints}`}
+                onClick={() =>
+                  router.push("/ecopoints/solicitar")}
+              >
+                Solicitar coleta
+              </button>
+            </>
+          )}
+
+          {user?.role === "enterprise" && (
+            <>
+              <div className={styles.divider}></div>
+              <p className="text-gray-600 font-medium mb-2">
+                Área da Empresa
+              </p>
+
+              <button
+                className={`${styles.button} ${styles.buttonEcopoints}`}
+                onClick={() => router.push("/ecopoints/cadastrar")}
+              >
+                Cadastrar Ecoponto
+              </button>
+              <button
+                className={`${styles.button} ${styles.buttonEcopoints}`}
+                onClick={() => router.push("/ecopoints/listar")}
+              >
+                Listar Ecopontos
+              </button>
+              <button
+                className={`${styles.button} ${styles.buttonEcopoints}`}
+                onClick={() => router.push("/my-collections-solicitation/enterprise")}
+              >
+                Solicitações de coletas
               </button>
             </>
           )}

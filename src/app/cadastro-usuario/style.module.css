@@ -86,3 +86,9 @@
   opacity: 0.6;
   cursor: not-allowed;
 }
+
+.textInfo {
+  color: #b1b1b1;
+  font-size: 0.95rem;
+  text-align: center;
+}
