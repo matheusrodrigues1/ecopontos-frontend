@@ -5,7 +5,7 @@ import ConfirmDialog from "../../components/ConfirmDialog";
 import { useToastContext } from "@/contexts/ToastContext";
 import { useRouter } from "next/navigation";
 import ProtectedRoute from "../../components/ProtectedRoute";
-import { getEcopontos } from "../getEcopoints";
+import getEcopointById from "../getEcopointById";
 import { handleDeleteEcoponto } from "../excluir/deleteEcoponto";
 import { EcoPointList } from "@/app/types/ecopoints/ecopoints";
 import Navbar from "@/app/navbar/navbar";
@@ -21,7 +21,25 @@ const Listar = () => {
     useEffect(() => {
         const fetchEcopoints = async () => {
             try {
-                const response = await getEcopontos();
+                // Resolve companyId from localStorage user (empresa logada)
+                let companyId: string | undefined = undefined;
+                try {
+                    const userStr = localStorage.getItem('user');
+                    if (userStr) {
+                        const user = JSON.parse(userStr);
+                        companyId = user && (user.companyId || user.id || user._id || user.userId) || undefined;
+                    }
+                } catch (e) {
+                    companyId = undefined;
+                }
+
+                let response;
+                if (companyId) {
+                    response = await getEcopointById(companyId);
+                } else {
+                    response = [];
+                }
+
                 console.log("Ecopontos fetched:", response);
                 setEcopoints(response);
             } catch (error) {
