@@ -5,7 +5,7 @@ import ConfirmDialog from "../../components/ConfirmDialog";
 import { useToastContext } from "@/contexts/ToastContext";
 import { useRouter } from "next/navigation";
 import ProtectedRoute from "../../components/ProtectedRoute";
-import getEcopointById from "../getEcopointById";
+import { getEcopontos } from "../getEcopoints";
 import { handleDeleteEcoponto } from "../excluir/deleteEcoponto";
 import { EcoPointList } from "@/app/types/ecopoints/ecopoints";
 import Navbar from "@/app/navbar/navbar";
@@ -21,27 +21,23 @@ const Listar = () => {
     useEffect(() => {
         const fetchEcopoints = async () => {
             try {
-                // Resolve companyId from localStorage user (empresa logada)
+                const all = await getEcopontos();
                 let companyId: string | undefined = undefined;
                 try {
-                    const userStr = localStorage.getItem('user');
-                    if (userStr) {
-                        const user = JSON.parse(userStr);
-                        companyId = user && (user.companyId || user.id || user._id || user.userId) || undefined;
+                    companyId = localStorage.getItem('companyId') || undefined;
+                    if (!companyId) {
+                        const userStr = localStorage.getItem('user');
+                        if (userStr) {
+                            const user = JSON.parse(userStr);
+                            companyId = user && (user.companyId || user.id || user._id || user.userId) || undefined;
+                        }
                     }
                 } catch (e) {
                     companyId = undefined;
                 }
 
-                let response;
-                if (companyId) {
-                    response = await getEcopointById(companyId);
-                } else {
-                    response = [];
-                }
-
-                console.log("Ecopontos fetched:", response);
-                setEcopoints(response);
+                const filtered = companyId ? (all || []).filter((ep: any) => String(ep.companyId) === String(companyId)) : [];
+                setEcopoints(filtered);
             } catch (error) {
                 console.error("Erro ao carregar ecopontos:", error);
                 showToast("Erro ao carregar lista de ecopontos.", "error");
