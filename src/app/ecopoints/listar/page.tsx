@@ -97,8 +97,8 @@ const Listar = () => {
                         </button>
 
                         <div className="flex-1 flex justify-center">
-                            <span className="font-bold text-2xl text-black">
-                                Lista de Ecopontos
+                            <span className="font-bold text-2xl text-[#093A3E]">
+                                Meus Ecopontos
                             </span>
                         </div>
 
@@ -130,15 +130,9 @@ const Listar = () => {
                         {!ecopoints || ecopoints.length === 0 ? (
                             <div className="text-center py-16">
                                 <p className="text-gray-600 mb-6 text-lg">Nenhum ecoponto cadastrado ainda.</p>
-                                <button
-                                    onClick={() => router.push('/ecopoints/cadastrar')}
-                                    className="px-8 py-4 bg-[#093A3E] text-white rounded-lg hover:bg-[#0c4a4f] transition-colors duration-200 font-medium text-lg"
-                                >
-                                    Cadastrar Primeiro Ecoponto
-                                </button>
                             </div>
                         ) : (
-                            <div className="w-full max-w-6xl">
+                            <div className="w-full max-w-6xl ">
                                 {ecopoints && ecopoints.map((ecopoint) => (
                                     <div
                                         key={ecopoint.id}
@@ -146,7 +140,7 @@ const Listar = () => {
                                             border: '2px solid #093A3E',
                                             borderRadius: '8px',
                                             padding: '24px',
-                                            backgroundColor: 'white',
+                                            backgroundColor: '#0C4A4F',
                                             boxShadow: '0 1px 3px 0 rgba(0, 0, 0, 0.1)',
                                             marginBottom: '24px'
                                         }}
@@ -157,7 +151,7 @@ const Listar = () => {
                                                     style={{
                                                         fontSize: '20px',
                                                         fontWeight: 'bold',
-                                                        color: 'black',
+                                                        color: 'white',
                                                         marginBottom: '16px',
                                                         border: 'none',
                                                         borderBottom: 'none'
@@ -167,22 +161,22 @@ const Listar = () => {
                                                 </h2>
                                                 <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '32px 12px', fontSize: '14px' }}>
                                                     <div>
-                                                        <span style={{ fontWeight: 'bold', color: 'black' }}>CNPJ:</span> <span style={{ color: '#374151', fontWeight: 'normal' }}>{ecopoint.cnpj}</span>
+                                                        <span style={{ fontWeight: 'bold', color: 'white' }}>CNPJ:</span> <span style={{ color: '#FFFAFA', fontWeight: 'normal' }}>{ecopoint.cnpj}</span>
                                                     </div>
                                                     <div>
-                                                        <span style={{ fontWeight: 'bold', color: 'black' }}>Horário:</span> <span style={{ color: '#374151', fontWeight: 'normal' }}>{ecopoint.opening_hours}</span>
+                                                        <span style={{ fontWeight: 'bold', color: 'white' }}>Horário:</span> <span style={{ color: '#FFFAFA', fontWeight: 'normal' }}>{ecopoint.opening_hours}</span>
                                                     </div>
                                                     <div>
-                                                        <span style={{ fontWeight: 'bold', color: 'black' }}>Intervalo:</span> <span style={{ color: '#374151', fontWeight: 'normal' }}>{ecopoint.interval}</span>
+                                                        <span style={{ fontWeight: 'bold', color: 'white' }}>Intervalo:</span> <span style={{ color: '#FFFAFA', fontWeight: 'normal' }}>{ecopoint.interval}</span>
                                                     </div>
                                                     <div>
-                                                        <span style={{ fontWeight: 'bold', color: 'black' }}>Endereço:</span> <span style={{ color: '#374151', fontWeight: 'normal' }}>{ecopoint.address}</span>
+                                                        <span style={{ fontWeight: 'bold', color: 'white' }}>Endereço:</span> <span style={{ color: '#FFFAFA', fontWeight: 'normal' }}>{ecopoint.address}</span>
                                                     </div>
                                                     <div style={{ gridColumn: 'span 2' }}>
-                                                        <span style={{ fontWeight: 'bold', color: 'black' }}>Materiais aceitos:</span> <span style={{ color: '#374151', fontWeight: 'normal' }}>{ecopoint.accepted_materials.join(", ")}</span>
+                                                        <span style={{ fontWeight: 'bold', color: 'white' }}>Materiais aceitos:</span> <span style={{ color: '#FFFAFA', fontWeight: 'normal' }}>{ecopoint.accepted_materials.join(", ")}</span>
                                                     </div>
                                                     <div style={{ gridColumn: 'span 2' }}>
-                                                        <span style={{ fontWeight: 'bold', color: 'black' }}>Coordenadas:</span> <span style={{ color: '#374151', fontWeight: 'normal' }}>{ecopoint.coordinates}</span>
+                                                        <span style={{ fontWeight: 'bold', color: 'white' }}>Coordenadas:</span> <span style={{ color: '#FFFAFA', fontWeight: 'normal' }}>{ecopoint.coordinates}</span>
                                                     </div>
                                                 </div>
                                             </div>
