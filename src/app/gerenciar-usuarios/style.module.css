@@ -1,5 +1,5 @@
 .botaoCadastrar {
-  background-color: #d10000;
+  background-color: #093a3e;
   color: #fff;
   padding: 0.75rem 1.5rem;
   border: none;
@@ -10,7 +10,7 @@
 }
 
 .botaoCadastrar:hover {
-  background-color: #a60000;
+  background-color: #0c4a4f;
 }
 
 .container {
