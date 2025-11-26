@@ -32,45 +32,48 @@ export default function ReclamarForm() {
   };
 
   return (
-    <form onSubmit={enviarReclamacao} className={styles.form}>
-      <h2 className={styles.title}>Envie sua Reclamação</h2>
-      <p className={styles.subtitle}>
-        Sua opinião é importante para melhorarmos o serviço.
-      </p>
+    // Adicionei este container para controlar o fundo da página
+    <div className={styles.container}>
+      <form onSubmit={enviarReclamacao} className={styles.form}>
+        <h2 className={styles.title}>Envie sua Reclamação</h2>
+        <p className={styles.subtitle}>
+          Sua opinião é importante para melhorarmos o serviço.
+        </p>
 
-      <div className={styles.field}>
-        <label>Nome</label>
-        <input
-          type="text"
-          value={nome}
-          onChange={(e) => setNome(e.target.value)}
-          required
-        />
-      </div>
+        <div className={styles.field}>
+          <label>Nome</label>
+          <input
+            type="text"
+            value={nome}
+            onChange={(e) => setNome(e.target.value)}
+            required
+          />
+        </div>
 
-      <div className={styles.field}>
-        <label>Email</label>
-        <input
-          type="email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          required
-        />
-      </div>
+        <div className={styles.field}>
+          <label>Email</label>
+          <input
+            type="email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            required
+          />
+        </div>
 
-      <div className={styles.field}>
-        <label>Mensagem</label>
-        <textarea
-          value={mensagem}
-          onChange={(e) => setMensagem(e.target.value)}
-          required
-          rows={4}
-        />
-      </div>
+        <div className={styles.field}>
+          <label>Mensagem</label>
+          <textarea
+            value={mensagem}
+            onChange={(e) => setMensagem(e.target.value)}
+            required
+            rows={4}
+          />
+        </div>
 
-      <button type="submit" disabled={loading} className={styles.button}>
-        {loading ? "Enviando..." : "Enviar Reclamação"}
-      </button>
-    </form>
+        <button type="submit" disabled={loading} className={styles.button}>
+          {loading ? "Enviando..." : "Enviar Reclamação"}
+        </button>
+      </form>
+    </div>
   );
 }

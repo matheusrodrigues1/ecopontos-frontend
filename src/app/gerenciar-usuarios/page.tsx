@@ -215,7 +215,7 @@ const GerenciarUsuarios = () => {
 
             <form onSubmit={handleSubmit} className="space-y-6">
               <div>
-                <label htmlFor="name" style={{ display: "block", marginBottom: 8, fontWeight: 500 }}>
+                <label htmlFor="name" style={{ display: "block", color: "#093A3E", marginBottom: 8, fontWeight: 500 }}>
                   Nome
                 </label>
                 <input
@@ -231,7 +231,7 @@ const GerenciarUsuarios = () => {
               </div>
 
               <div>
-                <label htmlFor="email" style={{ display: "block", marginBottom: 8, fontWeight: 500 }}>
+                <label htmlFor="email" style={{ display: "block", color: "#093A3E", marginBottom: 8, fontWeight: 500 }}>
                   Email
                 </label>
                 <input
@@ -247,7 +247,7 @@ const GerenciarUsuarios = () => {
               </div>
 
               <div>
-                <label htmlFor="password" style={{ display: "block", marginBottom: 8, fontWeight: 500 }}>
+                <label htmlFor="password" style={{ display: "block", color: "#093A3E", marginBottom: 8, fontWeight: 500 }}>
                   Senha
                 </label>
                 <input
@@ -265,6 +265,7 @@ const GerenciarUsuarios = () => {
 
               <button
                 type="submit"
+                style={{ marginTop: "24px" }}
                 disabled={isLoading}
                 className={styles.submitButton}
               >
@@ -294,7 +295,7 @@ const GerenciarUsuarios = () => {
                   <div style={{ overflowX: "auto" }}>
                     <table className={styles.userTable}>
                       <thead className={styles.tableHeader}>
-                        <tr style={{ backgroundColor: "#000"}}>
+                        <tr style={{ backgroundColor: "#000" }}>
                           <th className={styles.tableCell}>Nome</th>
                           <th className={styles.tableCell}>Email</th>
                           <th className={styles.tableCell}>Tipo</th>

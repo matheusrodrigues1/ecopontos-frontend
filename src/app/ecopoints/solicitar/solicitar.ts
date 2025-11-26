@@ -1,18 +1,26 @@
-import axios from "axios";
+import axios from "../../utils/axios";
 
-const token = localStorage.getItem('token');
-
-export const solicitarColeta = (payload: {
+export type SolicitarPayload = {
+  ecopointId: string;
+  quantity: number;
   material: string;
-  quantidade: number;
-  endereco: string;
-  observacoes?: string;
-}) => {
-  const token = localStorage.getItem('token'); // atualiza token sempre
-  return axios.post("http://localhost:3001/collections", payload, {
-    headers: {
+  address: string;
+  description?: string;
+};
+
+export const solicitarColeta = (payload: SolicitarPayload) => {
+  const body = {
+    ecopointId: payload.ecopointId,
+    quantity: payload.quantity,
+    material: payload.material,
+    address: payload.address,
+    description: payload.description || "",
+  };
+
+  return axios.post("http://localhost:3001/request-collection", body, {
+    headers: { 
       "Content-Type": "application/json",
-      "Authorization": `Bearer ${token}`
-    }
+      "Authorization": `Bearer ${localStorage.getItem("token")}`
+    },
   });
 };

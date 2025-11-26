@@ -1,6 +1,6 @@
 .container {
   min-height: 100vh;
-  background: linear-gradient(135deg, #0f766e 0%, #065f46 50%, #064e3b 100%);
+  background: linear-gradient(135deg, #07555c 0%, #095a62 50%, #054c53 100%);
   padding: 40px 20px;
 }
 
@@ -25,7 +25,7 @@
 }
 
 .gradientText {
-  background: linear-gradient(135deg, #10b981 0%, #34d399 100%);
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.85) 0%, rgba(255, 255, 255, 0.85) 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -74,7 +74,7 @@
   left: 0;
   right: 0;
   height: 4px;
-  background: linear-gradient(90deg, #10b981, #34d399, #6ee7b7);
+  background: linear-gradient(90deg, #07555c, #0b5a61, #054950);
   transform: scaleX(0);
   transform-origin: left;
   transition: transform 0.4s ease;
@@ -100,14 +100,14 @@
 
 .categoria {
   display: inline-block;
-  background: linear-gradient(135deg, #10b981, #059669);
+  background: linear-gradient(135deg, #07555c, #07555c);
   color: #fff;
   padding: 6px 16px;
   border-radius: 20px;
   font-size: 13px;
   font-weight: 600;
   letter-spacing: 0.3px;
-  box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3);
+  box-shadow: 0 4px 12px rgba(11, 131, 79, 0.3);
 }
 
 .data {
@@ -119,14 +119,14 @@
 .noticiaTitulo {
   font-size: 24px;
   font-weight: 700;
-  color: #0f766e;
+  color: #07555c;
   margin-bottom: 16px;
   line-height: 1.4;
   transition: color 0.3s ease;
 }
 
 .noticiaCard:hover .noticiaTitulo {
-  color: #059669;
+  color:#07555c;
 }
 
 .noticiaTexto {
@@ -140,22 +140,22 @@
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  color: #059669;
+  color: #07555c;
   font-weight: 600;
   text-decoration: none;
   font-size: 15px;
   transition: all 0.3s ease;
   padding: 12px 24px;
   border-radius: 12px;
-  background: linear-gradient(135deg, rgba(16, 185, 129, 0.1), rgba(5, 150, 105, 0.1));
-  border: 1px solid rgba(16, 185, 129, 0.2);
+  background: linear-gradient(135deg, rgba(21, 77, 58, 0.1), rgba(5, 150, 105, 0.1));
+  border: 1px solid rgba(27, 102, 77, 0.2);
 }
 
 .leiaMais:hover {
   gap: 12px;
-  background: linear-gradient(135deg, #10b981, #059669);
+  background: linear-gradient(135deg, #07555c, #07555c);
   color: #fff;
-  box-shadow: 0 8px 24px rgba(16, 185, 129, 0.4);
+  box-shadow: 0 8px 24px #07555c;
   transform: translateX(4px);
 }
 

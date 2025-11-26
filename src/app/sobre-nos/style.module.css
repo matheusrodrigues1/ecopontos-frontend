@@ -48,11 +48,11 @@
 }
 
 .card {
-    background-color: white;
+    background-color: #093A3E;
     padding: 32px 24px;
     border-radius: 16px;
     box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.03), 0 4px 6px -2px rgba(0, 0, 0, 0.02);
-    border: 1px solid #f3f4f6;
+    border: 1px solid #07555c;
     text-align: center;
     transition: all 0.3s ease;
     display: flex;
@@ -63,13 +63,13 @@
 .card:hover {
     transform: translateY(-5px);
     box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.05), 0 10px 10px -5px rgba(0, 0, 0, 0.02);
-    border-color: #e5e7eb;
+    border-color: #07555c;
 }
 
 .cardTitle {
     font-size: 1.35rem;
     font-weight: 700;
-    color: #093A3E;
+    color: #f0fdfa;
     margin-bottom: 16px;
 }
 
@@ -82,7 +82,7 @@
 .cardText {
     font-size: 1rem;
     line-height: 1.6;
-    color: #6b7280;
+    color: #cde2dd;
     display: -webkit-box;
     -webkit-line-clamp: 4;
     -webkit-box-orient: vertical;
@@ -98,7 +98,7 @@
 .readMoreBtn {
     background: none;
     border: none;
-    color: #093A3E;
+    color: #f0fdfa;
     font-weight: 700;
     font-size: 0.95rem;
     cursor: pointer;
@@ -109,7 +109,7 @@
 }
 
 .readMoreBtn:hover {
-    background-color: #f0fdfa;
+    background-color: #f0fdfa73;
     text-decoration: underline;
 }
 

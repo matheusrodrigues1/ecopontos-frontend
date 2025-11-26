@@ -9,8 +9,8 @@ const NoticiasPage = () => {
             id: 1,
             titulo: "Novos ecopontos são inaugurados em Arapiraca",
             data: "10 de Outubro de 2025",
-            texto: "A Prefeitura de Arapiraca inaugurou mais dois ecopontos para ampliar o alcance da coleta seletiva. As novas unidades estão localizadas nos bairros Primavera e Cacimbas, e irão atender mais de 5 mil famílias, promovendo o descarte correto de resíduos recicláveis.",
-            link: "#",
+            texto: "Arapiraca oferece quatros Ecopontos de entregas voluntárias para atendimento da população. Mais limpeza e pontos de entregas voluntárias para a população arapiraquense. Eles funcionam de segunda a sábado, das 8h às 18h, exceto durante os feriados.",
+            link: "https://web.arapiraca.al.gov.br/2023/01/arapiraca-oferece-quatros-ecopontos-de-entregas-voluntarias-para-atendimento-da-populacao/",
             categoria: "Infraestrutura"
         },
         {
